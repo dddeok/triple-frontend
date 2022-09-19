@@ -33,6 +33,7 @@ export const GlobalStyle = createGlobalStyle`
     --color-purple100: rgba(151, 95, 254, 0.1);
     --color-emerald: rgba(13, 208, 175, 1);
     --color-white: rgba(255, 255, 255, 1);
+    --color-white500: rgba(255, 255, 255, 0.5);
     --color-white600: rgba(255, 255, 255, 0.6);
     --color-white900: rgba(255, 255, 255, 0.9);
     --color-skyblue: rgba(55, 168, 255, 1);
@@ -45,6 +46,10 @@ export const GlobalStyle = createGlobalStyle`
     --color-teal100: rgba(10, 219, 143, 0.1);
     --color-teal900: rgba(10, 219, 143, 0.9);
     --color-vermilion: rgb(255, 97, 105, 1);
+    
+    /** tech blog */
+    --color-black: rgba(0, 0, 0, 1);
+    --color-chineseBlack: rgba(18, 18, 18, 1);
   }
 
   html,
