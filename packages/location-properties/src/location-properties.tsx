@@ -1,7 +1,6 @@
 import { useCallback, useMemo } from 'react'
 import { Segment, List } from '@titicaca/core-elements'
 import ActionSheet from '@titicaca/action-sheet'
-import { useI18n } from '@titicaca/i18n'
 import { useHistoryFunctions, useUriHash } from '@titicaca/react-contexts'
 import { TranslatedProperty } from '@titicaca/type-definitions'
 
@@ -37,7 +36,6 @@ export default function LocationProperties({
   onExtraPropertyClick?: (extraProperty: ExtraProperty) => void
   onCopy: (value: string) => void
 } & Parameters<typeof Segment>['0']) {
-  const { t } = useI18n()
   const uriHash = useUriHash()
   const { back } = useHistoryFunctions()
 
@@ -51,7 +49,7 @@ export default function LocationProperties({
 
     addressValue &&
       allValues.set('addresses', {
-        title: t('common:address', '주소'),
+        title: '주소',
         value: addressValue,
         onClick: onAddressesClick,
         eventActionFragment: '기본정보_주소',
@@ -59,7 +57,7 @@ export default function LocationProperties({
 
     phoneNumber &&
       allValues.set('phoneNumber', {
-        title: t('common:contact', '전화'),
+        title: '전화',
         value: phoneNumber,
         onClick: onPhoneNumberClick,
         eventActionFragment: '기본정보_전화번호',
@@ -67,7 +65,7 @@ export default function LocationProperties({
 
     officialSiteUrl &&
       allValues.set('officialSiteUrl', {
-        title: t('common:homepage', '홈페이지'),
+        title: '홈페이지',
         value: officialSiteUrl,
         singleLine: true,
         onClick: onOfficialSiteUrlClick,
@@ -114,15 +112,8 @@ export default function LocationProperties({
           ))}
         </List>
       </Segment>
-      <ActionSheet
-        title={t('common:copyActionSheetTitle', '복사하기')}
-        open={isActionSheetOpen}
-        onClose={back}
-      >
-        <ActionSheet.Item
-          buttonLabel={t('common:copy', '복사')}
-          onClick={handleClick}
-        >
+      <ActionSheet title="복사하기" open={isActionSheetOpen} onClose={back}>
+        <ActionSheet.Item buttonLabel="복사" onClick={handleClick}>
           {value}
         </ActionSheet.Item>
       </ActionSheet>

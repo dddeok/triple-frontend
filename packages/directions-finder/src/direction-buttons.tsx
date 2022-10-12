@@ -6,7 +6,6 @@ import {
 } from '@titicaca/react-contexts'
 import { useTripleClientMetadata } from '@titicaca/react-triple-client-interfaces'
 import { Button } from '@titicaca/core-elements'
-import { useI18n } from '@titicaca/i18n'
 
 import AskToTheLocal from './ask-to-the-local'
 import { HASH_ASK_TO_LOCALS_POPUP } from './constants'
@@ -26,7 +25,6 @@ export default function DirectionButtons({
   phoneNumber?: string
   isDomestic?: boolean
 }) {
-  const { t } = useI18n()
   const app = useTripleClientMetadata()
   const uriHash = useUriHash()
   const { push, back, showTransitionModal } = useHistoryFunctions()
@@ -48,7 +46,7 @@ export default function DirectionButtons({
             size="small"
             onClick={handleAskToLocalsClick}
           >
-            {t('common:askToTheLocal', '현지에서 길묻기')}
+            현지에서 길묻기
           </Button>
         ) : null}
         <Button
@@ -58,7 +56,7 @@ export default function DirectionButtons({
           size="small"
           onClick={onDirectionsClick}
         >
-          {t('common:showDirections', '길찾기')}
+          길찾기
         </Button>
       </Button.Group>
 

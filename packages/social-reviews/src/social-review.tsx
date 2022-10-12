@@ -1,6 +1,5 @@
 import { Section } from '@titicaca/core-elements'
 import { useEventTrackingContext } from '@titicaca/react-contexts'
-import { useI18n } from '@titicaca/i18n'
 import { useNavigate } from '@titicaca/router'
 
 import { ExternalLinks } from './external-links'
@@ -23,7 +22,6 @@ export default function SocialReviews({
   ...props
 }: SocialReviewsProps) {
   const { trackSimpleEvent } = useEventTrackingContext()
-  const { t } = useI18n()
   const navigate = useNavigate()
 
   if (!socialReviews || socialReviews.length === 0) {
@@ -32,7 +30,7 @@ export default function SocialReviews({
 
   return (
     <ExternalLinks
-      title={t('common:externalLinks', '소셜 리뷰')}
+      title="소셜 리뷰"
       externalLinks={socialReviews.map(
         ({ imageUrl, publisher: meta, title, url }) => ({
           data: url,

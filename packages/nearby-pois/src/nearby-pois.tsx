@@ -1,5 +1,4 @@
 import { useReducer, useCallback, useEffect, SyntheticEvent } from 'react'
-import { useI18n } from '@titicaca/i18n'
 import {
   Section,
   Button,
@@ -64,8 +63,6 @@ export default function NearbyPois({
   })
   const { pois, hasMore, fetching } = state[currentTab]
   const { trackSimpleEvent } = useEventTrackingContext()
-
-  const { t } = useI18n()
 
   useEffect(() => {
     async function fetchAndSetPois() {
@@ -144,23 +141,21 @@ export default function NearbyPois({
 
   return (
     <Section anchor="nearby-pois" minHeight={404} {...props}>
-      <H1 margin={{ bottom: 20 }}>
-        {t('common:nearbyPois', '근처의 추천 장소')}
-      </H1>
+      <H1 margin={{ bottom: 20 }}>근처의 추천 장소</H1>
 
       <Tabs
         type="basic"
         value={currentTab}
         options={[
-          { label: t('common:attraction', '관광'), value: 'attraction' },
-          { label: t('common:restaurant', '맛집'), value: 'restaurant' },
+          { label: '관광', value: 'attraction' },
+          { label: '맛집', value: 'restaurant' },
         ]}
         onChange={handleTabChange}
       />
 
       {pois.length === 0 && hasMore === false ? (
         <Paragraph center margin={{ top: 70 }}>
-          {t('common:noNearbyPlaces', '장소가 없습니다.')}
+          장소가 없습니다.
         </Paragraph>
       ) : (
         <>
@@ -186,7 +181,7 @@ export default function NearbyPois({
               disabled={fetching}
               onClick={handleLoadMore}
             >
-              {t('common:moreNearbyplaces', '더 많은 장소 보기')}
+              '더 많은 장소 보기
             </Button>
           )}
         </>

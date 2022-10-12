@@ -79,14 +79,12 @@ export default function Actions({
             icon={scraped ? 'saveFilled' : 'saveEmpty'}
             onClick={onScrapedChange}
           >
-            {scraped
-              ? t('common:unscrap', '저장취소')
-              : t('common:scrap', '저장하기')}
+            {scraped ? '저장취소' : '저장하기'}
           </ActionButton>
         ) : null}
         {onScheduleAdd ? (
           <ActionButton icon="schedule" onClick={onScheduleAdd}>
-            {t('common:addSchedule', '일정추가')}
+            일정추가
           </ActionButton>
         ) : null}
         <ActionButton
@@ -111,7 +109,7 @@ export default function Actions({
             : t('common:addReview', '리뷰쓰기')}
         </ActionButton>
         <ActionButton icon="share" onClick={onContentShare}>
-          {t('common:share', '공유하기')}
+          공유하기
         </ActionButton>
       </Button.Group>
       {!noDivider && <HR1 margin={{ top: 8, bottom: 0 }} />}
