@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import {
   useTransitionModal,
   useLoginCtaModal,
@@ -22,6 +23,7 @@ export function useDisabledLinkNotifierCreator({
 }: {
   alert?: (message: string) => void
 } = {}) {
+  const { t } = useTranslation('common-web')
   const app = useTripleClientMetadata()
   const sessionAvailable = useSessionAvailability()
   const { show: showTransitionModal } = useTransitionModal()
@@ -32,7 +34,7 @@ export function useDisabledLinkNotifierCreator({
   }: AllowSourceProps) => {
     if (allowSource === 'none') {
       return () => {
-        alert('접근할 수 없는 링크입니다.')
+        alert(t('jeobgeunhal-su-eobsneun-ringkeuibnida.'))
       }
     }
 

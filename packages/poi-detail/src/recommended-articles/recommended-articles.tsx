@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, SyntheticEvent } from 'react'
+import { useTranslation } from 'next-i18next'
 import { Section, Responsive, Container, H1 } from '@titicaca/core-elements'
 import { useEventTrackingContext } from '@titicaca/react-contexts'
 import { TransitionType, useTransitionModal } from '@titicaca/modals'
@@ -46,6 +47,8 @@ export default function RecommendedArticles({
     onClick?: () => void
   }
 }) {
+  const { t } = useTranslation('common-web')
+
   const [recommendedArticles, setRecommendedArticles] = useState<
     ArticleListingData[]
   >([])
@@ -106,7 +109,7 @@ export default function RecommendedArticles({
       padding={{ left: 0, right: 0 }}
     >
       <Responsive minWidth={768}>
-        <H1 textAlign="center">놓치기 아까운 이 지역 꿀 정보 </H1>
+        <H1 textAlign="center">{t('nohcigi-aggaun-i-jiyeog-ggul-jeongbo')}</H1>
 
         <Carousel
           margin={{ top: 20 }}
@@ -134,12 +137,14 @@ export default function RecommendedArticles({
 
         <Container padding={deskTopPadding || { left: 110, right: 110 }}>
           <MoreButton basic compact onClick={handleShowMoreClick}>
-            여행 정보 더보기
+            {t('yeohaeng-jeongbo-deobogi')}
           </MoreButton>
         </Container>
       </Responsive>
       <Responsive maxWidth={767}>
-        <H1 margin={{ left: 30 }}>{`놓치기 아까운\n이 지역 꿀 정보 `}</H1>
+        <H1 margin={{ left: 30 }}>
+          {t('nohcigi-aggaun-ni-jiyeog-ggul-jeongbo')}
+        </H1>
 
         <Carousel
           margin={{ top: 20 }}
@@ -167,7 +172,7 @@ export default function RecommendedArticles({
 
         <Container padding={mobilePadding || { left: 30, right: 30 }}>
           <MoreButton basic compact onClick={handleShowMoreClick}>
-            여행 정보 더보기
+            {t('yeohaeng-jeongbo-deobogi')}
           </MoreButton>
         </Container>
       </Responsive>

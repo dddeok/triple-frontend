@@ -1,4 +1,5 @@
 import { SyntheticEvent } from 'react'
+import { useTranslation } from 'next-i18next'
 import styled, { css } from 'styled-components'
 import {
   Text,
@@ -86,6 +87,8 @@ export default function AppBanner({
   href?: string
   onCtaClick?: (e?: SyntheticEvent) => void
 } & LayeringMixinProps) {
+  const { t } = useTranslation('common-web')
+
   return (
     <AppBannerFrame {...props} zTier={zTier} zIndex={zIndex}>
       <Logo />
@@ -104,7 +107,7 @@ export default function AppBanner({
         </Text>
       </ContentContainer>
       <CallToAction href={href} onClick={onCtaClick}>
-        {cta || '앱에서 보기'}
+        {cta || t('aebeseo-bogi')}
       </CallToAction>
     </AppBannerFrame>
   )

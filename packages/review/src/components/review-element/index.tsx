@@ -7,6 +7,7 @@ import {
   SyntheticEvent,
 } from 'react'
 import moment from 'moment'
+import { useTranslation } from 'next-i18next'
 import styled, { css } from 'styled-components'
 import * as CSS from 'csstype'
 import { StaticIntersectionObserver as IntersectionObserver } from '@titicaca/intersection-observer'
@@ -127,6 +128,8 @@ export default function ReviewElement({
   resourceId,
   isMorePage,
 }: ReviewElementProps) {
+  const { t } = useTranslation('common-web')
+
   const [unfolded, setUnfolded] = useState(false)
   const { deriveCurrentStateAndCount, updateLikedStatus } =
     useReviewLikesContext()
@@ -202,7 +205,7 @@ export default function ReviewElement({
           }
         >
           {blindedAt ? (
-            '신고가 접수되어 블라인드 처리되었습니다.'
+            t('singoga-jeobsudoeeo-beulraindeu-ceoridoeeossseubnida.')
           ) : comment ? (
             unfolded ? (
               comment
@@ -344,6 +347,8 @@ function RecentReviewInfo({
   visitDate?: string
   recentTrip: boolean
 }) {
+  const { t } = useTranslation('common-web')
+
   const startDate = moment('2000-01')
   const endDate = moment().subtract(180, 'days').format('YYYY-MM')
   const isOldReview =
@@ -362,13 +367,16 @@ function RecentReviewInfo({
             alt="recent-trip-icon"
           />
           <Text padding={{ left: 4, right: 8 }} size={14} color="blue" bold>
-            최근 여행
+            {t('coegeun-yeohaeng')}
           </Text>
         </>
       ) : null}
       {visitDate ? (
         <Text size={14} color="gray700">
-          {visitYear}년 {visitMonth}월 여행
+          {t('visityear-nyeon-visitmonth-weol-yeohaeng', {
+            visitYear,
+            visitMonth,
+          })}
         </Text>
       ) : null}
     </FlexBox>

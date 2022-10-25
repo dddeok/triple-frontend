@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import { Text } from '@titicaca/core-elements'
 import { Modal, Alert } from '@titicaca/modals'
 import styled from 'styled-components'
@@ -24,20 +25,22 @@ const MODAL_HASHES = [
 ]
 
 const TITLE_TYPES: HashKeyValue = {
-  [HASH_ALREADY_DOWNLOAD_COUPON]: '이미 받은 쿠폰입니다.',
-  [HASH_COMPLETE_DOWNLOAD_COUPON]: '쿠폰 받기 완료',
-  [HASH_COMPLETE_DOWNLOAD_COUPON_GROUP]: '쿠폰 받기 완료',
-  [HASH_COMPLETE_DOWNLOAD_PART_OF_COUPON_GROUP]: '쿠폰 받기 완료',
+  [HASH_ALREADY_DOWNLOAD_COUPON]: 'imi-badeun-kuponibnida.',
+  [HASH_COMPLETE_DOWNLOAD_COUPON]: 'kupon-badgi-wanryo',
+  [HASH_COMPLETE_DOWNLOAD_COUPON_GROUP]: 'kupon-badgi-wanryo',
+  [HASH_COMPLETE_DOWNLOAD_PART_OF_COUPON_GROUP]: 'kupon-badgi-wanryo',
 }
 
 const MESSAGE_TYPES: HashKeyValue = {
   [HASH_COMPLETE_DOWNLOAD_COUPON]:
-    '쿠폰을 받았습니다!\n쿠폰함에서 확인할 수 있어요~!',
+    'kuponeul-badassseubnida-kuponhameseo-hwaginhal-su-isseoyo~',
+
   [HASH_COMPLETE_DOWNLOAD_COUPON_GROUP]:
-    '쿠폰을 모두 받았습니다.\n쿠폰함에서 확인할 수 있어요~!',
-  [HASH_ALREADY_DOWNLOAD_COUPON]: '쿠폰함에서 쿠폰을 확인하세요.',
+    'kuponeul-modu-badassseubnida.-kuponhameseo-hwaginhal-su-isseoyo~',
+
+  [HASH_ALREADY_DOWNLOAD_COUPON]: 'kuponhameseo-kuponeul-hwaginhaseyo.',
   [HASH_COMPLETE_DOWNLOAD_PART_OF_COUPON_GROUP]:
-    '쿠폰을 모두 받았습니다.\n(이미 받은 쿠폰 제외)\n쿠폰함에서 확인할 수 있어요~!',
+    'kuponeul-modu-badassseubnida.-imi-badeun-kupon-jeoe-kuponhameseo-hwaginhal-su-isseoyo~',
 }
 
 const ICON_TYPES: HashKeyValue = {
@@ -50,10 +53,10 @@ const ICON_TYPES: HashKeyValue = {
 }
 
 const CONFIRM_MESSAGE_TYPES: HashKeyValue = {
-  [HASH_ALREADY_DOWNLOAD_COUPON]: '쿠폰함 가기',
-  [HASH_COMPLETE_DOWNLOAD_COUPON]: '쿠폰 확인',
-  [HASH_COMPLETE_DOWNLOAD_COUPON_GROUP]: '쿠폰 확인',
-  [HASH_COMPLETE_DOWNLOAD_PART_OF_COUPON_GROUP]: '쿠폰 확인',
+  [HASH_ALREADY_DOWNLOAD_COUPON]: 'kuponham-gagi',
+  [HASH_COMPLETE_DOWNLOAD_COUPON]: 'kupon-hwagin',
+  [HASH_COMPLETE_DOWNLOAD_COUPON_GROUP]: 'kupon-hwagin',
+  [HASH_COMPLETE_DOWNLOAD_PART_OF_COUPON_GROUP]: 'kupon-hwagin',
 }
 
 const CouponIcon = styled.img`
@@ -64,6 +67,8 @@ const CouponIcon = styled.img`
 `
 
 export function CouponModal({ identifier }: { identifier: string }) {
+  const { t } = useTranslation('common-web')
+
   const uriHash = useUriHash()
   const { back } = useHistoryFunctions()
   const navigate = useNavigate()
@@ -91,7 +96,7 @@ export function CouponModal({ identifier }: { identifier: string }) {
           bottom: 10,
         }}
       >
-        {TITLE_TYPES[modalHash]}
+        {t(TITLE_TYPES[modalHash])}
       </Text>
       <Text
         center
@@ -105,12 +110,12 @@ export function CouponModal({ identifier }: { identifier: string }) {
         }}
         alpha={0.7}
       >
-        {MESSAGE_TYPES[modalHash]}
+        {t(MESSAGE_TYPES[modalHash])}
       </Text>
 
       <Modal.Actions>
         <Modal.Action color="gray" onClick={back}>
-          취소
+          {t('cwiso')}
         </Modal.Action>
         <Modal.Action
           color="blue"
@@ -123,7 +128,7 @@ export function CouponModal({ identifier }: { identifier: string }) {
             )
           }}
         >
-          {CONFIRM_MESSAGE_TYPES[modalHash]}
+          {t(CONFIRM_MESSAGE_TYPES[modalHash])}
         </Modal.Action>
       </Modal.Actions>
     </Modal>
@@ -137,12 +142,14 @@ export function CouponAlertModal({
   identifier: string
   errorMessage?: string
 }) {
+  const { t } = useTranslation('common-web')
+
   const uriHash = useUriHash()
   const { back } = useHistoryFunctions()
 
   return (
     <Alert
-      title="쿠폰 다운로드 안내"
+      title={t('kupon-daunrodeu-annae')}
       open={uriHash === `${identifier}.${HASH_ERROR_COUPON}`}
       onConfirm={back}
     >

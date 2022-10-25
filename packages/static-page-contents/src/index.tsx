@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from 'react'
+import { useTranslation } from 'next-i18next'
 import styled from 'styled-components'
 import { gray500, gray, blue, brightGray } from '@titicaca/color-palette'
 
@@ -68,12 +69,14 @@ const NoContent = styled.div`
 export function StaticPageContents({
   src,
   className,
-  onFallback = () => <NoContent>컨텐츠를 불러올 수 없습니다.</NoContent>,
+  onFallback,
 }: {
   src: string
   className?: string
   onFallback?: () => JSX.Element
 }) {
+  const { t } = useTranslation('common-web')
+
   const { content, init, fetchStatic } = useFetchStatic(src)
 
   useEffect(() => {
@@ -89,9 +92,15 @@ export function StaticPageContents({
         />
       )
     case !init:
-      return <NoContent>컨텐츠를 로딩중입니다.</NoContent>
+      return <NoContent>{t('keontenceureul-rodingjungibnida.')}</NoContent>
     default:
-      return onFallback()
+      if (onFallback) {
+        return onFallback()
+      }
+
+      return (
+        <NoContent>{t('keontenceureul-bulreool-su-eobsseubnida.')}</NoContent>
+      )
   }
 }
 

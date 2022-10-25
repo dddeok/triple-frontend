@@ -1,4 +1,5 @@
 import { MouseEventHandler } from 'react'
+import { useTranslation } from 'next-i18next'
 import styled from 'styled-components'
 import { ResourceListItem, Image } from '@titicaca/core-elements'
 
@@ -67,6 +68,8 @@ export function RegionListElement({
   value: RegionData | null
   onClick?: MouseEventHandler
 }) {
+  const { t } = useTranslation('common-web')
+
   if (value) {
     const {
       nameOverride,
@@ -81,7 +84,7 @@ export function RegionListElement({
           src={style && style.backgroundImageUrl}
         />
         <Name>{nameOverride || names.ko || names.en || names.local}</Name>
-        <Action>바로가기</Action>
+        <Action>{t('barogagi')}</Action>
       </ResourceListItem>
     )
   }

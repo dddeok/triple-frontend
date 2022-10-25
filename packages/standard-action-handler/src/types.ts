@@ -1,3 +1,4 @@
+import { TFunction } from 'next-i18next'
 import { UrlElements } from '@titicaca/view-utilities'
 import { App } from '@titicaca/react-triple-client-interfaces'
 
@@ -25,10 +26,13 @@ export interface ContextOptions {
   app?: App | null
 }
 
-export type WebAction = (
-  url: UrlElements,
-  options: ContextOptions,
+export interface WebActionParams {
+  url: UrlElements
+  options: ContextOptions
   handler: {
     execute: (url: string, params?: NavigateOptions) => Promise<void>
-  },
-) => Promise<boolean>
+  }
+  t: TFunction
+}
+
+export type WebAction = (webActionParams: WebActionParams) => Promise<boolean>

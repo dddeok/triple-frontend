@@ -1,12 +1,11 @@
 import qs from 'qs'
-import { UrlElements } from '@titicaca/view-utilities/src/url'
 
-import { ContextOptions } from './types'
+import { WebActionParams } from './types'
 
-export default async function newWindow(
-  { path, query }: UrlElements,
-  { routeExternally }: ContextOptions,
-) {
+export default async function newWindow({
+  url: { path, query },
+  options: { routeExternally },
+}: WebActionParams) {
   if (path === '/web-action/new-window' && query) {
     const { href } = qs.parse(query) as {
       href?: string

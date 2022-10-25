@@ -1,4 +1,5 @@
 import { ForwardedRef, forwardRef } from 'react'
+import { useTranslation } from 'next-i18next'
 import styled from 'styled-components'
 import { Container, FlexBox, HR1 } from '@titicaca/core-elements'
 import { useLoginCtaModal } from '@titicaca/modals'
@@ -40,6 +41,8 @@ function Register(
   },
   ref: ForwardedRef<TextAreaHandle>,
 ) {
+  const { t } = useTranslation('common-web')
+
   const {
     parentMessageId,
     currentMessageId,
@@ -77,8 +80,8 @@ function Register(
   })
 
   const placeholder = parentMessageId
-    ? placeholders?.childReply || '답글을 입력하세요.'
-    : placeholders?.reply || '댓글을 입력하세요.'
+    ? placeholders?.childReply || t('dabgeuleul-ibryeoghaseyo.')
+    : placeholders?.reply || t('daesgeuleul-ibryeoghaseyo.')
 
   return (
     <Container
@@ -93,7 +96,7 @@ function Register(
         justifyContent="space-between"
       >
         <AutoResizingTextarea
-          placeholder={placeholder}
+          placeholder={placeholder ?? ''}
           minRows={1}
           maxRows={4}
           value={plaintext || ''}
@@ -108,7 +111,7 @@ function Register(
           }}
           active={!!plaintext}
         >
-          등록
+          {t('deungrog')}
         </RegisterButton>
       </FlexBox>
 

@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import styled, { css } from 'styled-components'
 import { Text, Responsive } from '@titicaca/core-elements'
 
@@ -45,6 +46,8 @@ function ImagePlaceholder({
   noContent,
   onClick,
 }: ImagePlaceholderProps) {
+  const { t } = useTranslation('common-web')
+
   return (
     <ImagePlaceholderContainer large={large} onClick={onClick}>
       <ImagePlaceholderContent large={large}>
@@ -52,7 +55,7 @@ function ImagePlaceholder({
           <>
             <PlaceholderIcon src="https://assets.triple.guide/images/img-empty-photo-m@4x.png" />
             <Text size="small" color="gray" alpha={0.3}>
-              이곳의 첫 번째 사진을 올려주세요.
+              {t('igosyi-ceos-beonjjae-sajineul-olryeojuseyo.')}
             </Text>
           </>
         )}

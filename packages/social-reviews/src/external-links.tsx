@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import styled from 'styled-components'
 import {
   Section,
@@ -36,6 +37,8 @@ function ExternalLinkItem<Data>({
   externalLink: ExternalLink<Data>
   onItemClick?: (e: MouseEvent<HTMLLIElement>, item: ExternalLink<Data>) => void
 }) {
+  const { t } = useTranslation('common-web')
+
   return (
     <ExternalLinkEntry
       minHeight={106}
@@ -60,7 +63,10 @@ function ExternalLinkItem<Data>({
           <FlexBox width={60} flexShrink={0}>
             <Image borderRadius={4}>
               <Image.FixedRatioFrame frame="big">
-                <Image.Img src={imageUrl} alt={`${title} 썸네일`} />
+                <Image.Img
+                  src={imageUrl}
+                  alt={t('title-sseomneil', { title })}
+                />
               </Image.FixedRatioFrame>
             </Image>
           </FlexBox>

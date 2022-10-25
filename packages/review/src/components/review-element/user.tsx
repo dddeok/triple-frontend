@@ -1,4 +1,5 @@
 import { PropsWithChildren, MouseEventHandler } from 'react'
+import { useTranslation } from 'next-i18next'
 import styled from 'styled-components'
 import { Container, Text } from '@titicaca/core-elements'
 
@@ -29,6 +30,8 @@ export default function User({
   onClick?: MouseEventHandler
   user: UserData
 }) {
+  const { t } = useTranslation('common-web')
+
   const { reviewsV2: reviewsCount } = userBoard || {}
   const { badges = [], level } = mileage || {}
 
@@ -47,7 +50,9 @@ export default function User({
             onClick={onClick}
           >
             {level && level > 0 ? `LEVEL${level} / ` : null}
-            {reviewsCount ? `${reviewsCount}개의 리뷰` : null}
+            {reviewsCount
+              ? t('reviewscount-gaeyi-ribyu', { reviewsCount })
+              : null}
           </Text>
         ) : null}
       </div>

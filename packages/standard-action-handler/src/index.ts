@@ -1,3 +1,5 @@
+import { TFunction } from 'next-i18next'
+
 import Handler from './handler'
 import serial from './serial'
 import invokeCta from './invoke-cta'
@@ -10,7 +12,7 @@ import imageDownload from './image-download'
 import scrollToElement from './scroll-to-element'
 import { ContextOptions } from './types'
 
-export function initialize(options: ContextOptions) {
+export function initialize(options: ContextOptions, t: TFunction) {
   const handler = new Handler({
     handlers: [
       serial,
@@ -24,6 +26,7 @@ export function initialize(options: ContextOptions) {
       scrollToElement,
     ],
     options,
+    t,
   })
 
   return handler.toFunction()

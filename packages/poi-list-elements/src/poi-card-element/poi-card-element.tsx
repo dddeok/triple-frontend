@@ -1,4 +1,5 @@
 import { MouseEventHandler } from 'react'
+import { useTranslation } from 'next-i18next'
 import styled from 'styled-components'
 import {
   Container,
@@ -99,6 +100,9 @@ export default function PoiCardElement({
   onDirectionButtonClick: Parameters<typeof DirectionButton>[0]['onClick']
   optimized?: boolean
 }) {
+  const { t } = useTranslation('common-web')
+
+  const formattedNightlyPrice = formatNumber(nightlyPrice)
   const { deriveCurrentStateAndCount } = useScrapsContext()
   const { scrapsCount } = deriveCurrentStateAndCount({
     id,
@@ -189,7 +193,7 @@ export default function PoiCardElement({
                   color="blue"
                   margin={{ right: 4 }}
                 >
-                  {distance} 이내
+                  {t('distance-inae', { distance })}
                 </Text>
               ) : null}
 
@@ -197,7 +201,7 @@ export default function PoiCardElement({
               {priceLabelOverride ||
                 (nightlyPrice !== undefined ? (
                   <Text inlineBlock size="small">
-                    {formatNumber(nightlyPrice)}원
+                    {t('formattednightlyprice-weon', { formattedNightlyPrice })}
                   </Text>
                 ) : null)}
             </Container>

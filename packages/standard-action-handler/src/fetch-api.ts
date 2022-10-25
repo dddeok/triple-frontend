@@ -1,7 +1,10 @@
 import qs from 'qs'
-import { UrlElements } from '@titicaca/view-utilities'
 
-export default async function fetchApi({ path, query }: UrlElements) {
+import { WebActionParams } from './types'
+
+export default async function fetchApi({
+  url: { path, query },
+}: WebActionParams) {
   if (path === '/web-action/fetch-api' && query) {
     const {
       path: apiPath,

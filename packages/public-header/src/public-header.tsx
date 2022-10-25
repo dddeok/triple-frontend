@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import styled from 'styled-components'
 import { white, brightGray } from '@titicaca/color-palette'
 import { useTripleClientMetadata } from '@titicaca/react-triple-client-interfaces'
@@ -101,8 +102,10 @@ export function PublicHeader({
   disableAutoHide,
   onClick,
   linkHref = '/my-bookings',
-  linkLabel = '내 예약',
+  linkLabel,
 }: PublicHeaderProps) {
+  const { t } = useTranslation('common-web')
+
   const app = useTripleClientMetadata()
   const visible = useAutoHide(disableAutoHide)
 
@@ -115,20 +118,20 @@ export function PublicHeader({
       <HeaderFrame>
         <Logo
           href={getCategoryHref(category)}
-          title={getCategoryTitle(category)}
+          title={getCategoryTitle({ category, t })}
         >
           <LogoImage
             alt="Triple"
             src="https://assets.triple.guide/images/img_intro_logo_dark.svg"
           />
           {category && (
-            <LogoCategoryImage {...getCategoryImageProps(category)} />
+            <LogoCategoryImage {...getCategoryImageProps({ category, t })} />
           )}
         </Logo>
 
         <ExtraActionsContainer>
           <ExtraActionItem href={linkHref} onClick={onClick}>
-            {linkLabel}
+            {linkLabel ?? t('nae-yeyag')}
           </ExtraActionItem>
           {deeplinkPath && <PublicHeaderDeeplink deeplinkPath={deeplinkPath} />}
         </ExtraActionsContainer>

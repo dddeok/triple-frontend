@@ -1,4 +1,5 @@
 import { SyntheticEvent } from 'react'
+import { useTranslation } from 'next-i18next'
 import styled from 'styled-components'
 import { Label, FlexBox } from '@titicaca/core-elements'
 
@@ -11,8 +12,8 @@ export const ORDER_BY_RECOMMENDATION = ''
 export const ORDER_BY_RECENCY = 'latest'
 
 const SORTING_OPTIONS = [
-  { key: ORDER_BY_RECOMMENDATION, text: '추천순' },
-  { key: ORDER_BY_RECENCY, text: '최신순' },
+  { key: ORDER_BY_RECOMMENDATION, text: 'cuceonsun' },
+  { key: ORDER_BY_RECENCY, text: 'coesinsun' },
 ]
 
 const OptionsContainer = styled(FlexBox)`
@@ -27,12 +28,14 @@ export default function SortingOptions({
   onSelect,
   selected,
 }: SortingOptionsProps) {
+  const { t } = useTranslation('common-web')
+
   return (
     <OptionsContainer flex alignItems="center">
       {SORTING_OPTIONS.map(({ key, text }) => (
         <Label key={key} radio selected={selected === key}>
           {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
-          <span onClick={onSelect && ((e) => onSelect(e, key))}>{text}</span>
+          <span onClick={onSelect && ((e) => onSelect(e, key))}>{t(text)}</span>
         </Label>
       ))}
     </OptionsContainer>

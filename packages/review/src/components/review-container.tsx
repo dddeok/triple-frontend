@@ -5,6 +5,7 @@ import {
   SyntheticEvent,
   useMemo,
 } from 'react'
+import { useTranslation, Trans } from 'next-i18next'
 import styled from 'styled-components'
 import {
   FlexBox,
@@ -130,6 +131,8 @@ function ReviewContainer({
   onReviewDelete?: ReviewDeleteHandler
   onFullListButtonClick?: (e: SyntheticEvent, sortingOption?: string) => void
 }) {
+  const { t } = useTranslation('common-web')
+
   const sessionAvailable = useSessionAvailability()
 
   const [recentTrip, setRecentTrip] = useState(initialRecentTrip)
@@ -209,6 +212,7 @@ function ReviewContainer({
     sessionAvailable,
     subscribeReviewUpdateEvent,
     unsubscribeReviewUpdateEvent,
+    setMyReview,
   ])
 
   const handleWriteButtonClick = useAppCallback(
@@ -321,6 +325,7 @@ function ReviewContainer({
 
   const recentReviewsCount = reviewsData.length
   const reviewsCount = recentTrip ? recentReviewsCount : totalReviewsCount
+  const numOfRestReviews = reviewsCount - SHORTENED_REVIEWS_COUNT_PER_PAGE
 
   return (
     <Section anchor={REVIEWS_SECTION_ID}>
@@ -334,24 +339,22 @@ function ReviewContainer({
 
         {shortened ? (
           <>
-            <Text bold size="huge" color="gray" alpha={1} inline>
-              리뷰
-            </Text>
             {(totalReviewsCount || 0) > 0 ? (
-              <Text bold size="huge" color="blue" alpha={1} inline>
-                {` ${formatNumber(totalReviewsCount)}`}
-              </Text>
+              <Trans i18nKey="ribyu-totalreviewscount">
+                <Text bold size="huge" color="gray" alpha={1} inline />
+                <Text bold size="huge" color="blue" alpha={1} inline>
+                  {{ totalReviewsCount: formatNumber(totalReviewsCount) }}
+                </Text>
+              </Trans>
             ) : null}
           </>
         ) : (
-          <>
+          <Trans i18nKey="totalreviewscount-gaeyi-ribyu">
             <Text bold size="huge" color="blue" alpha={1} inline>
-              {` ${formatNumber(totalReviewsCount)}`}
+              {{ totalReviewsCount: formatNumber(totalReviewsCount) }}
             </Text>
-            <Text bold size="huge" color="gray" alpha={1} inline>
-              개의 리뷰
-            </Text>
-          </>
+            <Text bold size="huge" color="gray" alpha={1} inline />
+          </Trans>
         )}
       </Container>
 
@@ -420,7 +423,7 @@ function ReviewContainer({
                     : handleFullListButtonClick
                 }
               >
-                {reviewsCount - SHORTENED_REVIEWS_COUNT_PER_PAGE}개 리뷰 더보기
+                {t('numofrestreviews-gae-ribyu-deobogi', { numOfRestReviews })}
               </Button>
             </Container>
           ) : null}
@@ -444,12 +447,12 @@ function ReviewContainer({
               }}
             >
               <Text color="gray" size="small" alpha={0.6} lineHeight={1.7}>
-                리뷰 쓰면 여행자 클럽 최대 3포인트!
+                {t('ribyu-sseumyeon-yeohaengja-keulreob-coedae-3pointeu')}
               </Text>
               <Text color="blue" size="small" lineHeight={1.7}>
-                포인트별 혜택 보기
+                {t('pointeubyeol-hyetaeg-bogi')}
               </Text>
-              <BulletRight alt="포인트별 혜택 보기" />
+              <BulletRight alt={t('pointeubyeol-hyetaeg-bogi')} />
             </MileageButton>
           ) : null}
         </>

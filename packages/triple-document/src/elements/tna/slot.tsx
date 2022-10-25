@@ -1,4 +1,5 @@
 import { SyntheticEvent, useCallback, useState } from 'react'
+import { useTranslation } from 'next-i18next'
 import { Container, H1, List, Button } from '@titicaca/core-elements'
 import { useEventTrackingContext } from '@titicaca/react-contexts'
 import { gray50 } from '@titicaca/color-palette'
@@ -16,6 +17,8 @@ export function Slot({
   title: string
   products: TnaProductData[]
 }) {
+  const { t } = useTranslation('common-web')
+
   const { trackEvent } = useEventTrackingContext()
   const navigate = useNavigate()
 
@@ -92,7 +95,7 @@ export function Slot({
           margin={{ top: 20 }}
           onClick={handleShowMoreClick}
         >
-          더보기
+          {t('deobogi')}
         </Button>
       ) : null}
     </Container>

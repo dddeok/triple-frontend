@@ -1,4 +1,5 @@
 import { useCallback } from 'react'
+import { useTranslation } from 'next-i18next'
 import styled from 'styled-components'
 import { Container, Card, Text, FlexBox, Button } from '@titicaca/core-elements'
 import { gray100, white } from '@titicaca/color-palette'
@@ -88,6 +89,8 @@ const SaveToItineraryButton = styled(Button)`
 `
 
 export default function ItineraryElement({ value }: Props) {
+  const { t } = useTranslation('common-web')
+
   const { courses, regionId, poiIds, hasItineraries, hideAddButton } =
     useItinerary(value)
   const addPoisToTrip = useHandleAddPoisToTrip(regionId || '')
@@ -226,7 +229,7 @@ export default function ItineraryElement({ value }: Props) {
           >
             <Download />
             <Text inline size={14} margin={{ left: 3 }} color="white">
-              내 일정으로 담기
+              {t('nae-iljeongeuro-damgi')}
             </Text>
           </SaveToItineraryButton>
         ) : null}

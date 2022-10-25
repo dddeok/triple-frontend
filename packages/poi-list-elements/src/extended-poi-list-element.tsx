@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import ExtendedResourceListElement, {
   ResourceListElementProps,
 } from '@titicaca/resource-list-element'
@@ -54,6 +55,8 @@ export function ExtendedPoiListElement<T extends PoiListElementType>({
   notes,
   optimized,
 }: ExtendedPoiListElementProps<T> & { optimized?: boolean }) {
+  const { t } = useTranslation('common-web')
+
   const { deriveCurrentStateAndCount } = useScrapsContext()
   const {
     source: { starRating },
@@ -75,7 +78,11 @@ export function ExtendedPoiListElement<T extends PoiListElementType>({
   const reviewsCount = Number((reviewsCountWithGraphql ?? rawReviewsCount) || 0)
   const note = (
     notes || [
-      starRating ? `${starRating}성급` : category ? category.name : null,
+      starRating
+        ? t('starrating-seonggeub', { starRating })
+        : category
+        ? category.name
+        : null,
       area ? area.name : vicinity,
     ]
   )

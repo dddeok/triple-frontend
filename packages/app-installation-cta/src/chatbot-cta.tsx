@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
+import { useTranslation } from 'next-i18next'
 import { Text, LayeringMixinProps } from '@titicaca/core-elements'
 import { CSSTransition } from 'react-transition-group'
 import { InventoryItemMeta } from '@titicaca/type-definitions'
@@ -43,6 +44,8 @@ export default function ChatbotCta({
   zIndex,
   unmountOnExit,
 }: ChatbotCtaProps & LayeringMixinProps) {
+  const { t } = useTranslation('common-web')
+
   const [inventoryItem, setInventoryItem] = useState<InventoryItemMeta>()
   const [visibility, setVisibility] = useState(false)
   const chatbotContainerRef = useRef<HTMLDivElement>(null)
@@ -53,7 +56,7 @@ export default function ChatbotCta({
     let visited = false
 
     try {
-      visited = !!getWebStorage('sessionStorage').getItem(
+      visited = !!getWebStorage({ type: 'sessionStorage', t }).getItem(
         CHATBOT_CLOSED_STORAGE_KEY,
       )
     } catch (error) {
@@ -65,7 +68,7 @@ export default function ChatbotCta({
       setVisibility(true)
       window.dispatchEvent(new Event(EVENT_CHATBOT_CTA_READY))
     }
-  }, [available, inventoryItem, onShow, visibility])
+  }, [available, inventoryItem, onShow, visibility, t])
 
   useEffect(() => {
     async function fetchInventory() {
@@ -106,7 +109,7 @@ export default function ChatbotCta({
     onDismiss && onDismiss(inventoryItem)
 
     try {
-      getWebStorage('sessionStorage').setItem(
+      getWebStorage({ type: 'sessionStorage', t }).setItem(
         CHATBOT_CLOSED_STORAGE_KEY,
         'true',
       )
@@ -114,7 +117,7 @@ export default function ChatbotCta({
       // 사용자가 CTA를 닫았다는 것을 기록합니다.
       // 필수적인 기능이 아니므로 에러를 조용히 넘깁니다.
     }
-  }, [onDismiss, inventoryItem])
+  }, [onDismiss, inventoryItem, t])
 
   return (
     <CSSTransition
@@ -139,10 +142,12 @@ export default function ChatbotCta({
           <ChatbotAction href={installUrl} onClick={handleClick}>
             {text}
           </ChatbotAction>
-          <ChatbotCloseButton onClick={handleDismiss}>닫기</ChatbotCloseButton>
+          <ChatbotCloseButton onClick={handleDismiss}>
+            {t('dadgi')}
+          </ChatbotCloseButton>
         </ChatBalloon>
         <ChatbotIcon href={installUrl} onClick={handleClick}>
-          트리플
+          {t('teuripeul')}
         </ChatbotIcon>
       </ChatbotContainer>
     </CSSTransition>

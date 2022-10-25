@@ -1,4 +1,5 @@
 import { useReducer, useCallback, useEffect, SyntheticEvent } from 'react'
+import { useTranslation } from 'next-i18next'
 import {
   Section,
   Button,
@@ -57,6 +58,8 @@ export default function NearbyPois({
   geolocation: PointGeoJson
   optimized?: boolean
 } & Parameters<typeof Section>['0']) {
+  const { t } = useTranslation('common-web')
+
   const [{ currentTab, ...state }, dispatch] = useReducer(nearbyPoisReducer, {
     ...INITIAL_STATE,
     ...(initialTab && { currentTab: initialTab }),
@@ -141,7 +144,7 @@ export default function NearbyPois({
 
   return (
     <Section anchor="nearby-pois" minHeight={404} {...props}>
-      <H1 margin={{ bottom: 20 }}>근처의 추천 장소</H1>
+      <H1 margin={{ bottom: 20 }}>{t('geunceoyi-cuceon-jangso')}</H1>
 
       <Tabs
         type="basic"
@@ -155,7 +158,7 @@ export default function NearbyPois({
 
       {pois.length === 0 && hasMore === false ? (
         <Paragraph center margin={{ top: 70 }}>
-          장소가 없습니다.
+          {t('jangsoga-eobsseubnida.')}
         </Paragraph>
       ) : (
         <>
@@ -181,7 +184,7 @@ export default function NearbyPois({
               disabled={fetching}
               onClick={handleLoadMore}
             >
-              '더 많은 장소 보기
+              {t('deo-manheun-jangso-bogi')}
             </Button>
           )}
         </>

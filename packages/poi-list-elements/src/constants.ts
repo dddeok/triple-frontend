@@ -9,7 +9,7 @@ export const POI_IMAGE_PLACEHOLDERS: {
 }
 
 export const TYPE_NAMES: { [key in PoiListElementType['type']]: string } = {
-  attraction: '관광명소',
-  restaurant: '음식점',
-  hotel: '호텔',
+  attraction: 'gwangwangmyeongso',
+  restaurant: 'eumsigjeom',
+  hotel: 'hotel',
 }

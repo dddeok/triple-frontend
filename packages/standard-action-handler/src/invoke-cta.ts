@@ -1,11 +1,9 @@
-import { UrlElements } from '@titicaca/view-utilities'
+import { WebActionParams } from './types'
 
-import { ContextOptions } from './types'
-
-export default async function invokeCta(
-  { path }: UrlElements,
-  { navigate, cta }: ContextOptions,
-) {
+export default async function invokeCta({
+  url: { path },
+  options: { navigate, cta },
+}: WebActionParams) {
   if (path === '/web-action/cta') {
     if (cta) {
       navigate(cta)

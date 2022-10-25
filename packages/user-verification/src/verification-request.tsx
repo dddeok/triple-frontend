@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import styled from 'styled-components'
 import { Modal } from '@titicaca/modals'
 import { Text } from '@titicaca/core-elements'
@@ -13,6 +14,8 @@ export default function VerificationRequest({
   verificationContext?: 'purchase' | 'cash'
   onCancel: () => void
 }) {
+  const { t } = useTranslation('common-web')
+
   const {
     verificationState: { verified },
     initiateVerification,
@@ -26,7 +29,7 @@ export default function VerificationRequest({
     <Modal open={verified === false}>
       <Icon />
       <Text bold center size="big" color="gray" margin={{ bottom: 10 }}>
-        인증이 필요해요!
+        {t('injeungi-pilyohaeyo')}
       </Text>
       <Text
         center
@@ -36,14 +39,12 @@ export default function VerificationRequest({
         alpha={0.7}
         margin={{ bottom: 40 }}
       >
-        예약을 위해서는
-        <br />
-        휴대폰 인증이 필요합니다. (최초 1회)
+        {t('yeyageul-wihaeseoneun-hyudaepon-injeungi-pilyohabnida.-coeco-1hoe')}
       </Text>
       <Modal.Actions>
-        <Modal.Action onClick={() => onCancel()}>뒤로가기</Modal.Action>
+        <Modal.Action onClick={() => onCancel()}>{t('dwirogagi')}</Modal.Action>
         <Modal.Action onClick={() => initiateVerification()} color="blue">
-          인증하기
+          {t('injeunghagi')}
         </Modal.Action>
       </Modal.Actions>
     </Modal>

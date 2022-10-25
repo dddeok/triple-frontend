@@ -1,6 +1,9 @@
+import { useTranslation } from 'next-i18next'
 import { Container, HR1, Text } from '@titicaca/core-elements'
 
 export default function NotExistReplies() {
+  const { t } = useTranslation('common-web')
+
   return (
     <>
       <HR1
@@ -10,8 +13,9 @@ export default function NotExistReplies() {
 
       <Container padding={{ top: 40, bottom: 50 }} textAlign="center">
         <Text size={14} lineHeight={1.2} color="gray300">
-          아직 댓글이 없어요. <br />
-          가장 먼저 댓글을 작성해보세요!
+          {t(
+            'ajig-daesgeuli-eobseoyo.-gajang-meonjeo-daesgeuleul-jagseonghaeboseyo',
+          )}
         </Text>
       </Container>
 

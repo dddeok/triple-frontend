@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import styled, { css } from 'styled-components'
 import { Text } from '@titicaca/core-elements'
 
@@ -34,10 +35,12 @@ interface PermanetlyCloseNoteProps {
 export function PermanentlyClosedNote({
   bottomBorderRadius = 6,
 }: PermanetlyCloseNoteProps) {
+  const { t } = useTranslation('common-web')
+
   return (
     <NoteContainer warning bottomBorderRadius={bottomBorderRadius}>
       <Text bold size="small" color="white">
-        더이상 운영하지 않습니다.
+        {t('deoisang-unyeonghaji-anhseubnida.')}
       </Text>
     </NoteContainer>
   )
@@ -62,6 +65,8 @@ export function BusinessHoursNote({
   todayBusinessHours,
   onClick,
 }: BusinessHourNoteProps) {
+  const { t } = useTranslation('common-web')
+
   return (
     <NoteContainer
       onClick={onClick}
@@ -70,10 +75,10 @@ export function BusinessHoursNote({
     >
       <Text bold size="small" color="white">
         {currentBusinessHours
-          ? `영업중 ${todayBusinessHours}`
+          ? t('yeongeobjung-todaybusinesshours', { todayBusinessHours })
           : todayBusinessHours
-          ? `영업준비중 ${todayBusinessHours}`
-          : '휴무일'}
+          ? t('yeongeobjunbijung-todaybusinesshours', { todayBusinessHours })
+          : t('hyumuil')}
       </Text>
     </NoteContainer>
   )

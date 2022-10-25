@@ -1,13 +1,11 @@
 import qs from 'qs'
-import { UrlElements } from '@titicaca/view-utilities'
 
-import { ContextOptions } from './types'
+import { WebActionParams } from './types'
 
-export default async function serial(
-  { path, query }: UrlElements,
-  options: ContextOptions,
-  handler: { execute: (url: string) => Promise<void> },
-) {
+export default async function serial({
+  url: { path, query },
+  handler,
+}: WebActionParams) {
   if (path === '/web-action/serial' && query) {
     const { actions } = qs.parse(query, { ignoreQueryPrefix: true })
 

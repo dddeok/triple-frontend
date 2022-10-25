@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import styled from 'styled-components'
 import { Container, FlexBox, Text } from '@titicaca/core-elements'
 
@@ -15,6 +16,8 @@ export default function BusinessHoursNote({
   todayBusinessHours?: string
   onClick: () => void
 }) {
+  const { t } = useTranslation('common-web')
+
   return (
     <Container margin={{ top: 10 }}>
       <FlexBox flex alignItems="center">
@@ -31,7 +34,9 @@ export default function BusinessHoursNote({
           ellipsis
           onClick={onClick}
         >
-          {todayBusinessHours ? `영업준비중 ${todayBusinessHours}` : '휴무일'}
+          {todayBusinessHours
+            ? t('yeongeobjunbijung-todaybusinesshours', { todayBusinessHours })
+            : t('hyumuil')}
         </Text>
 
         <IconBox>

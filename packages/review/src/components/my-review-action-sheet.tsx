@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import ActionSheet from '@titicaca/action-sheet'
 import { Confirm } from '@titicaca/modals'
 import {
@@ -37,6 +38,8 @@ export default function MyReviewActionSheet({
   onReviewEdit,
   onReviewDelete,
 }: MyReviewActionSheetProps) {
+  const { t } = useTranslation('common-web')
+
   const uriHash = useUriHash()
   const { replace, back } = useHistoryFunctions()
   const { deleteMyReview } = useMyReviewsContext()
@@ -74,11 +77,11 @@ export default function MyReviewActionSheet({
       >
         {!myReview.blindedAt ? (
           <ActionSheet.Item icon="review" onClick={onReviewEdit}>
-            수정하기
+            {t('sujeonghagi')}
           </ActionSheet.Item>
         ) : null}
         <ActionSheet.Item icon="delete" onClick={handleDeleteMenuClick}>
-          삭제하기
+          {t('sagjehagi')}
         </ActionSheet.Item>
       </ActionSheet>
 
@@ -96,7 +99,9 @@ export default function MyReviewActionSheet({
                 })
         }
       >
-        삭제하겠습니까? 삭제하면 적립된 리뷰 포인트도 함께 사라집니다.
+        {t(
+          'sagjehagessseubnigga-sagjehamyeon-jeogribdoen-ribyu-pointeudo-hamgge-sarajibnida.',
+        )}
       </Confirm>
     </>
   )

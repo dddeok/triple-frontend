@@ -1,3 +1,5 @@
+import { TFunction } from 'next-i18next'
+
 import type { Category } from './types'
 
 export function getCategoryHref(category?: Category) {
@@ -13,34 +15,46 @@ export function getCategoryHref(category?: Category) {
   }
 }
 
-export function getCategoryTitle(category?: Category) {
+export function getCategoryTitle({
+  category,
+  t,
+}: {
+  category?: Category
+  t: TFunction
+}) {
   switch (category) {
     case 'air':
-      return 'Triple 항공 홈'
+      return t('triple-hanggong-hom')
     case 'hotels':
-      return 'Triple 숙소 홈'
+      return t('triple-sugso-hom')
     case 'tna':
-      return 'Triple 투어 티켓 홈'
+      return t('triple-tueo-tikes-hom')
     default:
-      return 'Triple 홈'
+      return t('triple-hom')
   }
 }
 
-export function getCategoryImageProps(category?: Category) {
+export function getCategoryImageProps({
+  category,
+  t,
+}: {
+  category?: Category
+  t: TFunction
+}) {
   switch (category) {
     case 'air':
       return {
-        alt: '항공',
+        alt: t('hanggong'),
         src: 'https://assets.triple.guide/images/img_intro_logo_air.svg',
       }
     case 'hotels':
       return {
-        alt: '숙소',
+        alt: t('sugso'),
         src: 'https://assets.triple.guide/images/img_intro_logo_hotels.svg',
       }
     case 'tna':
       return {
-        alt: '투어 티켓',
+        alt: t('tueo-tikes'),
         src: 'https://assets.triple.guide/images/img_intro_logo_tna.svg',
       }
     default:

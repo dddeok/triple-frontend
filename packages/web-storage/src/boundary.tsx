@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import { withTranslation, WithTranslation } from 'next-i18next'
 import { Alert } from '@titicaca/modals'
 
 import { WebStorageError } from './error'
@@ -11,46 +12,52 @@ interface WebStorageErrorBoundaryState {
   error: WebStorageError | null
 }
 
-export class WebStorageErrorBoundary extends Component<
-  WebStorageErrorBoundaryProps,
-  WebStorageErrorBoundaryState
-> {
-  public constructor(props: WebStorageErrorBoundaryProps) {
-    super(props)
+export const WebStorageErrorBoundary = withTranslation('common-web')(
+  class WebStorageErrorBoundaryClass extends Component<
+    WebStorageErrorBoundaryProps & WithTranslation,
+    WebStorageErrorBoundaryState
+  > {
+    public constructor(props: WebStorageErrorBoundaryProps & WithTranslation) {
+      super(props)
 
-    this.state = { error: null }
-  }
-
-  public static getDerivedStateFromError(
-    error: Error,
-  ): Partial<WebStorageErrorBoundaryState> {
-    if (error instanceof WebStorageError) {
-      return { error }
+      this.state = { error: null }
     }
 
-    return { error: null }
-  }
+    public static getDerivedStateFromError(
+      error: Error,
+    ): Partial<WebStorageErrorBoundaryState> {
+      if (error instanceof WebStorageError) {
+        return { error }
+      }
 
-  public componentDidCatch(error: Error) {
-    if (!(error instanceof WebStorageError)) {
-      throw error
-    }
-  }
-
-  public render() {
-    const {
-      props: { onConfirm, children },
-      state: { error },
-    } = this
-
-    if (error) {
-      return (
-        <Alert open title="문제가 발생했습니다." onConfirm={onConfirm}>
-          {error.userGuideMessage}
-        </Alert>
-      )
+      return { error: null }
     }
 
-    return <>{children}</>
-  }
-}
+    public componentDidCatch(error: Error) {
+      if (!(error instanceof WebStorageError)) {
+        throw error
+      }
+    }
+
+    public render() {
+      const {
+        props: { onConfirm, children, t },
+        state: { error },
+      } = this
+
+      if (error) {
+        return (
+          <Alert
+            open
+            title={t('munjega-balsaenghaessseubnida.')}
+            onConfirm={onConfirm}
+          >
+            {error.userGuideMessage}
+          </Alert>
+        )
+      }
+
+      return <>{children}</>
+    }
+  },
+)

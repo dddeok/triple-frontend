@@ -97,7 +97,7 @@ export default function Carousel({
       if (currentImage) {
         const { attachmentId, id, type } = currentImage
         const action = '대표사진선택'
-        const label = `스와이프${attachmentId ? `_사용자등록` : ''}`
+        const label = `스와이프${attachmentId ? '_사용자등록' : ''}`
 
         trackEvent({
           fa: {

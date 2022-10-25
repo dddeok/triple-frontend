@@ -1,4 +1,5 @@
 import { useCallback } from 'react'
+import { useTranslation } from 'next-i18next'
 import { Container, Text, Button } from '@titicaca/core-elements'
 import styled from 'styled-components'
 import { TranslatedProperty } from '@titicaca/type-definitions'
@@ -57,6 +58,9 @@ function BookingCompletion({
   descriptions,
   region,
 }: BookingCompletionProps) {
+  const { t } = useTranslation('common-web')
+
+  const regionName = region?.names.ko || region?.names.en
   const navigate = useNavigate()
 
   const handleMoveToRegion = useAppCallback(
@@ -71,7 +75,7 @@ function BookingCompletion({
     <>
       <Container margin={{ bottom: 12 }}>
         <Text size={28} bold>
-          {title || `예약이 \n 접수되었습니다.`}
+          {title || t('yeyagi-n-jeobsudoeeossseubnida.')}
         </Text>
       </Container>
       {(descriptions || []).map((description, idx) => (
@@ -86,7 +90,7 @@ function BookingCompletion({
         </DescriptionText>
       ))}
       <Text color="gray" size="mini" alpha={0.5}>
-        자세한 사항은 내 예약에서 확인해주세요.
+        {t('jasehan-sahangeun-nae-yeyageseo-hwaginhaejuseyo.')}
       </Text>
       {compact ? (
         <Button
@@ -98,7 +102,7 @@ function BookingCompletion({
           onClick={onMoveToBookingDetail}
           fluid
         >
-          {myBookingButtonTitle || '내 예약에서 확인'}
+          {myBookingButtonTitle || t('nae-yeyageseo-hwagin')}
         </Button>
       ) : (
         <>
@@ -111,7 +115,7 @@ function BookingCompletion({
                 size="small"
                 onClick={onMoveToBookingDetail}
               >
-                {myBookingButtonTitle || '내 예약에서 확인'}
+                {myBookingButtonTitle || t('nae-yeyageseo-hwagin')}
               </Button>
               <Button
                 basic
@@ -123,19 +127,19 @@ function BookingCompletion({
                   navigate('/main')
                 }}
               >
-                트리플 홈으로 가기
+                {t('teuripeul-homeuro-gagi')}
               </Button>
             </Button.Group>
           </Container>
-          {region ? (
+          {regionName ? (
             <GrayButton fluid margin={{ top: 6 }} onClick={handleMoveToRegion}>
-              {region.names.ko || region.names.en} 여행 준비하러 가기
+              {t('regionname-yeohaeng-junbihareo-gagi', { regionName })}
             </GrayButton>
           ) : null}
 
           {onAddToSchedule ? (
             <GrayButton fluid margin={{ top: 6 }} onClick={onAddToSchedule}>
-              내 일정에 추가하기
+              {t('nae-iljeonge-cugahagi')}
             </GrayButton>
           ) : null}
         </>

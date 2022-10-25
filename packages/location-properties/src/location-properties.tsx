@@ -1,4 +1,5 @@
 import { useCallback, useMemo } from 'react'
+import { useTranslation } from 'next-i18next'
 import { Segment, List } from '@titicaca/core-elements'
 import ActionSheet from '@titicaca/action-sheet'
 import { useHistoryFunctions, useUriHash } from '@titicaca/react-contexts'
@@ -36,6 +37,8 @@ export default function LocationProperties({
   onExtraPropertyClick?: (extraProperty: ExtraProperty) => void
   onCopy: (value: string) => void
 } & Parameters<typeof Segment>['0']) {
+  const { t } = useTranslation('common-web')
+
   const uriHash = useUriHash()
   const { back } = useHistoryFunctions()
 
@@ -49,7 +52,7 @@ export default function LocationProperties({
 
     addressValue &&
       allValues.set('addresses', {
-        title: '주소',
+        title: t('juso'),
         value: addressValue,
         onClick: onAddressesClick,
         eventActionFragment: '기본정보_주소',
@@ -57,7 +60,7 @@ export default function LocationProperties({
 
     phoneNumber &&
       allValues.set('phoneNumber', {
-        title: '전화',
+        title: t('jeonhwa'),
         value: phoneNumber,
         onClick: onPhoneNumberClick,
         eventActionFragment: '기본정보_전화번호',
@@ -65,7 +68,7 @@ export default function LocationProperties({
 
     officialSiteUrl &&
       allValues.set('officialSiteUrl', {
-        title: '홈페이지',
+        title: t('hompeiji'),
         value: officialSiteUrl,
         singleLine: true,
         onClick: onOfficialSiteUrlClick,
@@ -112,8 +115,12 @@ export default function LocationProperties({
           ))}
         </List>
       </Segment>
-      <ActionSheet title="복사하기" open={isActionSheetOpen} onClose={back}>
-        <ActionSheet.Item buttonLabel="복사" onClick={handleClick}>
+      <ActionSheet
+        title={t('bogsahagi')}
+        open={isActionSheetOpen}
+        onClose={back}
+      >
+        <ActionSheet.Item buttonLabel={t('bogsa')} onClick={handleClick}>
           {value}
         </ActionSheet.Item>
       </ActionSheet>

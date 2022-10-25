@@ -1,4 +1,5 @@
 import { SyntheticEvent, useCallback, useState } from 'react'
+import { useTranslation } from 'next-i18next'
 import { List } from '@titicaca/core-elements'
 import {
   useEventTrackingContext,
@@ -41,6 +42,8 @@ export default function ReviewsList({
   showToast: AppNativeActionProps['showToast']
   isMorePage: boolean
 }) {
+  const { t } = useTranslation('common-web')
+
   const [selectedReview, setSelectedReview] = useState<ReviewData | undefined>(
     undefined,
   )
@@ -69,12 +72,12 @@ export default function ReviewsList({
         })
 
         if (unregister) {
-          showToast('탈퇴한 사용자입니다.')
+          showToast(t('taltoehan-sayongjaibnida.'))
         } else {
           navigateUserDetail(uid)
         }
       },
-      [trackEvent, resourceId, showToast, navigateUserDetail],
+      [trackEvent, resourceId, showToast, navigateUserDetail, t],
     ),
   )
 

@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+import { useTranslation } from 'next-i18next'
 import styled, { css } from 'styled-components'
 import { formatNumber } from '@titicaca/view-utilities'
 import {
@@ -122,6 +123,9 @@ function RichPricing({
   hideDiscountRate,
   isSoldOut,
 }: RichPricingProps) {
+  const { t } = useTranslation('common-web')
+
+  const formattedSalePrice = formatNumber(salePrice)
   const pricingDescription = description ? (
     typeof description === 'string' ? (
       <Text size="tiny" alpha={0.8} margin={{ top: 3 }}>
@@ -162,7 +166,8 @@ function RichPricing({
         ) : null}
 
         <Text size={20} bold inline color={isSoldOut ? 'gray300' : 'gray'}>
-          {priceLabelOverride || `${formatNumber(salePrice)}원`}
+          {priceLabelOverride ||
+            t('formattedsaleprice-weon', { formattedSalePrice })}
         </Text>
       </PricingContainer>
       {pricingDescription}
@@ -176,6 +181,9 @@ const RegularPricing = ({
   priceLabelOverride,
   isSoldOut,
 }: RegularPricingProps) => {
+  const { t } = useTranslation('common-web')
+
+  const formattedSalePrice = formatNumber(salePrice)
   const hasBasePrice =
     typeof basePrice === 'number' && basePrice > 0 && basePrice > salePrice
 
@@ -193,7 +201,8 @@ const RegularPricing = ({
         </Text>
       )}
       <Text size={18} bold inline color={isSoldOut ? 'gray300' : 'gray'}>
-        {priceLabelOverride || `${formatNumber(salePrice)}원`}
+        {priceLabelOverride ||
+          t('formattedsaleprice-weon', { formattedSalePrice })}
       </Text>
     </PricingContainer>
   )

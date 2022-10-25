@@ -1,4 +1,5 @@
 import { SyntheticEvent } from 'react'
+import { useTranslation } from 'next-i18next'
 import styled, { css } from 'styled-components'
 import { getColor } from '@titicaca/color-palette'
 import { Container } from '@titicaca/core-elements'
@@ -45,6 +46,8 @@ const GenderContainer = styled.div<{
 `
 
 function GenderRadio({ name, value, onChange }: GenderRadioProps) {
+  const { t } = useTranslation('common-web')
+
   return (
     <Container>
       <GenderContainer
@@ -53,7 +56,7 @@ function GenderRadio({ name, value, onChange }: GenderRadioProps) {
         selected={value === 'MALE'}
         onClick={(e: SyntheticEvent) => onChange && onChange(e, 'MALE')}
       >
-        남자
+        {t('namja')}
       </GenderContainer>
 
       <GenderContainer
@@ -62,7 +65,7 @@ function GenderRadio({ name, value, onChange }: GenderRadioProps) {
         selected={value === 'FEMALE'}
         onClick={(e: SyntheticEvent) => onChange && onChange(e, 'FEMALE')}
       >
-        여자
+        {t('yeoja')}
       </GenderContainer>
     </Container>
   )

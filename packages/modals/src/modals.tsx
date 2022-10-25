@@ -1,4 +1,5 @@
 import { ReactNode, SyntheticEvent } from 'react'
+import { useTranslation } from 'next-i18next'
 
 import Modal from './modal-base'
 import Actions from './actions'
@@ -24,19 +25,21 @@ export function Confirm({
   onCancel?: (e?: SyntheticEvent) => unknown
   onConfirm?: (e?: SyntheticEvent) => unknown
 }) {
+  const { t } = useTranslation('common-web')
+
   return (
     <Modal open={open} onClose={onClose}>
       <ModalBody title={title} description={children} />
       <Actions
         negative={{
-          text: cancelText || '취소',
+          text: cancelText || t('cwiso'),
           onClick: (e?: SyntheticEvent) =>
             onCancel
               ? !onCancel(e) && onClose && onClose(e)
               : onClose && onClose(e),
         }}
         positive={{
-          text: confirmText || '확인',
+          text: confirmText || t('hwagin'),
           onClick: (e?: SyntheticEvent) =>
             onConfirm
               ? !onConfirm(e) && onClose && onClose(e)
@@ -63,6 +66,8 @@ export function Alert({
   onClose?: (e?: SyntheticEvent) => unknown
   onConfirm?: (e?: SyntheticEvent) => unknown
 }) {
+  const { t } = useTranslation('common-web')
+
   return (
     <Modal open={open} onClose={onClose}>
       <ModalBody title={title} description={children} />
@@ -75,7 +80,7 @@ export function Alert({
               : onClose && onClose(e)
           }
         >
-          {confirmText || '확인'}
+          {confirmText || t('hwagin')}
         </Modal.Action>
       </Modal.Actions>
     </Modal>

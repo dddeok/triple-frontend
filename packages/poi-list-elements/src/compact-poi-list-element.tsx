@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
+import { useTranslation } from 'next-i18next'
 import {
   Text,
   SquareImage,
@@ -42,6 +43,8 @@ export function CompactPoiListElement<T extends PoiListElementType>({
   },
   onClick,
 }: CompactPoiListElementProps<T>) {
+  const { t } = useTranslation('common-web')
+
   const [actionButtonWidth, setActionButtonWidth] = useState(0)
   const actionButtonRef = useRef<HTMLDivElement & { width?: number }>(null)
 
@@ -75,7 +78,7 @@ export function CompactPoiListElement<T extends PoiListElementType>({
       </Text>
       <Text size="tiny" alpha={0.7} margin={{ top: 4, left: 50 }}>
         {[
-          TYPE_NAMES[type],
+          t(TYPE_NAMES[type]),
           regionName
             ? areas?.[0]?.name
               ? `${regionName}(${areas?.[0]?.name})`

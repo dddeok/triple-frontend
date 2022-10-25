@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react'
+import { useTranslation, TFunction } from 'next-i18next'
 import styled from 'styled-components'
 import {
   Container,
@@ -66,11 +67,6 @@ const ThanksButton = styled.button`
 const HASH_MORE_ACTION_SHEET = 'reply.more-action-sheet'
 export const HASH_DELETE_CLOSE_MODAL = 'reply.delete-close-modal'
 
-const CONTENT_TEXT = {
-  deleted: '작성자가 삭제한 댓글입니다.',
-  blinded: '다른 사용자의 신고로 블라인드 되었습니다.',
-}
-
 export default function Reply({
   reply,
   reply: {
@@ -93,11 +89,14 @@ export default function Reply({
   focusInput: () => void
   fetchMoreReplies: (reply?: ReplyType) => void
 }) {
+  const { t } = useTranslation('common-web')
+
   const [likeReaction, setLikeReactions] = useState(reactions.like)
   const { setEditingMessage } = useRepliesContext()
   const { push, back } = useHistoryFunctions()
   const { asyncBack } = useIsomorphicNavigation()
   const navigate = useNavigate()
+  const likeReactionCount = likeReaction?.count
 
   const handleMoreClick = useCallback(
     (id) => {
@@ -205,6 +204,7 @@ export default function Reply({
     deleted,
     blinded,
     childrenCount,
+    t,
   })
 
   const handleUserClick = useAppCallback(
@@ -294,9 +294,9 @@ export default function Reply({
               </ThanksButton>
             )}
 
-            {likeReaction && likeReaction.count > 0 ? (
+            {likeReactionCount && likeReactionCount > 0 ? (
               <Text padding={{ left: 2 }} size={12} color="gray300" bold>
-                좋아요 {likeReaction.count}
+                {t('johayo-likereactioncount', { likeReactionCount })}
               </Text>
             ) : null}
 
@@ -307,7 +307,7 @@ export default function Reply({
               bold
               onClick={() => handleWriteReplyClick(actionReply)}
             >
-              답글달기
+              {t('dabgeuldalgi')}
             </Text>
           </ReactionBox>
         ) : null}
@@ -323,7 +323,7 @@ export default function Reply({
           inlineBlock
           onClick={() => fetchMoreReplies(reply)}
         >
-          이전 답글 더보기
+          {t('ijeon-dabgeul-deobogi')}
         </Text>
       ) : null}
 
@@ -346,11 +346,11 @@ export default function Reply({
         title={
           isMine
             ? parentId
-              ? '내 답글'
-              : '내 댓글'
+              ? t('nae-dabgeul')
+              : t('nae-daesgeul')
             : parentId
-            ? '답글'
-            : '댓글'
+            ? t('dabgeul')
+            : t('daesgeul')
         }
         actionSheetHash={`${HASH_MORE_ACTION_SHEET}.${id}`}
         onEditClick={() =>
@@ -386,6 +386,8 @@ function Content({
   blinded: boolean
   deleted: boolean
 }) {
+  const { t } = useTranslation('common-web')
+
   const [unfolded, setUnfolded] = useState(false)
   const foldedPosition = findFoldedPosition(5, text)
   const navigate = useNavigate()
@@ -434,7 +436,7 @@ function Content({
           cursor="pointer"
           onClick={() => setUnfolded((prevState) => !prevState)}
         >
-          …더보기
+          {t('...deobogi')}
         </Text>
       ) : null}
     </Container>
@@ -456,6 +458,8 @@ function FeatureActionSheet({
   onDeleteClick: () => void
   onReportClick: () => void
 }) {
+  const { t } = useTranslation('common-web')
+
   const uriHash = useUriHash()
   const { back } = useHistoryFunctions()
 
@@ -467,11 +471,17 @@ function FeatureActionSheet({
     >
       {isMine ? (
         <>
-          <ActionSheet.Item onClick={onEditClick}>수정하기</ActionSheet.Item>
-          <ActionSheet.Item onClick={onDeleteClick}>삭제하기</ActionSheet.Item>
+          <ActionSheet.Item onClick={onEditClick}>
+            {t('sujeonghagi')}
+          </ActionSheet.Item>
+          <ActionSheet.Item onClick={onDeleteClick}>
+            {t('sagjehagi')}
+          </ActionSheet.Item>
         </>
       ) : (
-        <ActionSheet.Item onClick={onReportClick}>신고하기</ActionSheet.Item>
+        <ActionSheet.Item onClick={onReportClick}>
+          {t('singohagi')}
+        </ActionSheet.Item>
       )}
     </ActionSheet>
   )
@@ -482,12 +492,19 @@ function deriveContent({
   deleted,
   blinded,
   childrenCount,
+  t,
 }: {
   text: string
   deleted: boolean
   blinded: boolean
   childrenCount: number
+  t: TFunction
 }) {
+  const contentText = {
+    deleted: t('jagseongjaga-sagjehan-daesgeulibnida.'),
+    blinded: t('dareun-sayongjayi-singoro-beulraindeu-doeeossseubnida.'),
+  }
+
   const type =
     deleted || blinded
       ? deleted && childrenCount >= 0
@@ -495,5 +512,5 @@ function deriveContent({
         : 'blinded'
       : 'default'
 
-  return type === 'default' ? text : CONTENT_TEXT[type]
+  return type === 'default' ? text : contentText[type]
 }

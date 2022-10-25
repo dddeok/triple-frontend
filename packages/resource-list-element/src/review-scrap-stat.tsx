@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import { Container, Rating } from '@titicaca/core-elements'
 import { formatNumber } from '@titicaca/view-utilities'
 
@@ -13,9 +14,13 @@ export default function ReviewScrapStat({
   reviewsCount: number | undefined
   scrapsCount: number | undefined
 }) {
+  const { t } = useTranslation('common-web')
+
   if (!reviewsCount && !scrapsCount) {
     return null
   }
+
+  const formattedScrapsCount = formatNumber(scrapsCount)
 
   return (
     <Container {...containerProps}>
@@ -26,7 +31,9 @@ export default function ReviewScrapStat({
       <ResourceListElementStats
         stats={[
           reviewsCount ? `(${formatNumber(reviewsCount)})` : null,
-          scrapsCount ? `저장 ${formatNumber(scrapsCount)}` : null,
+          scrapsCount
+            ? t('jeojang-formattedscrapscount', { formattedScrapsCount })
+            : null,
         ]}
         inline
         size="tiny"

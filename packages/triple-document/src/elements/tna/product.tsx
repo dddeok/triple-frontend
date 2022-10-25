@@ -1,4 +1,5 @@
 import { MouseEventHandler, SyntheticEvent, useCallback } from 'react'
+import { useTranslation } from 'next-i18next'
 import { Text, Tag, Container, Image, Rating } from '@titicaca/core-elements'
 import { formatNumber } from '@titicaca/view-utilities'
 import { StaticIntersectionObserver } from '@titicaca/intersection-observer'
@@ -19,6 +20,11 @@ function Pricing({
   basePrice?: number
   salePrice: number
 }) {
+  const { t } = useTranslation('common-web')
+
+  const formattedBasePrice = formatNumber(basePrice)
+  const formattedSalePrice = formatNumber(salePrice)
+
   const rate = basePrice
     ? Math.floor(((basePrice - salePrice) / basePrice) * 100)
     : null
@@ -35,7 +41,7 @@ function Pricing({
 
       <Container>
         <Text inline bold size={18} color="gray">
-          {`${formatNumber(salePrice)}원`}
+          {t('formattedsaleprice-weon', { formattedSalePrice })}
         </Text>
 
         {basePrice ? (
@@ -45,7 +51,9 @@ function Pricing({
             size="mini"
             strikethrough
             margin={{ left: 5 }}
-          >{`${formatNumber(basePrice)}원`}</Text>
+          >
+            {t('formattedbaseprice-weon', { formattedBasePrice })}
+          </Text>
         ) : null}
       </Container>
     </Container>
@@ -78,6 +86,8 @@ export function TnaProductWithPrice({
   onClick: (e: SyntheticEvent, product: TnaProductData, index: number) => void
   onIntersect: (product: TnaProductData, index: number) => void
 }) {
+  const { t } = useTranslation('common-web')
+
   const { isPublic } = useUserAgentContext()
 
   const salePrice =
@@ -95,6 +105,7 @@ export function TnaProductWithPrice({
   } = generateCoupon({
     applicableCoupon,
     expectedApplicableCoupon,
+    t,
   })
   const hasSelfPackageBenefit = !!bestSelfPackageDiscountSpec
 
@@ -120,7 +131,10 @@ export function TnaProductWithPrice({
         <Image>
           <Image.FixedDimensionsFrame size="small" width={90} floated="left">
             {heroImage ? (
-              <Image.Img src={heroImage} alt={`${title}의 썸네일`} />
+              <Image.Img
+                src={heroImage}
+                alt={t('title-yi-sseomneil', { title })}
+              />
             ) : (
               <Image.Placeholder src={PLACEHOLDER_IMAGE_URL} />
             )}
@@ -195,7 +209,7 @@ export function TnaProductWithPrice({
 
           {hasSelfPackageBenefit && (
             <Text bold size="small" color="gray700" margin={{ top: 4 }}>
-              셀프패키지 추가할인 가능
+              {t('selpeupaekiji-cugahalin-ganeung')}
             </Text>
           )}
         </Container>

@@ -1,7 +1,10 @@
 import qs from 'qs'
-import { UrlElements } from '@titicaca/view-utilities'
 
-export default async function imageDownload({ path, query }: UrlElements) {
+import { WebActionParams } from './types'
+
+export default async function imageDownload({
+  url: { path, query },
+}: WebActionParams) {
   if (path === '/web-action/image-download' && query) {
     const { imageId } = qs.parse(query, { ignoreQueryPrefix: true })
 

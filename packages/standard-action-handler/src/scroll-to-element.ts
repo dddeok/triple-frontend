@@ -1,12 +1,12 @@
 import qs from 'qs'
-import { UrlElements } from '@titicaca/view-utilities'
 import { scrollToElement as scrollTo } from '@titicaca/scroll-to-element'
-import type { App } from '@titicaca/react-triple-client-interfaces'
 
-export default async function scrollToElement(
-  { path, query }: UrlElements,
-  { app }: { app?: App | null },
-) {
+import { WebActionParams } from './types'
+
+export default async function scrollToElement({
+  url: { path, query },
+  options: { app },
+}: WebActionParams) {
   if (path === '/web-action/scroll-to-element' && query) {
     const { hash } = qs.parse(query) as {
       hash?: string

@@ -1,3 +1,4 @@
+import { TFunction } from 'next-i18next'
 import {
   hasAccessibleTripleNativeClients,
   shareLink,
@@ -53,7 +54,13 @@ function copyUrlToClipboard({
   })
 }
 
-function shareNativeInterface({ params }: { params: SharingParams }) {
+function shareNativeInterface({
+  params,
+  t,
+}: {
+  params: SharingParams
+  t: TFunction
+}) {
   const { title, description, image, webUrl, appUrl } = params
 
   return shareLink({
@@ -63,11 +70,11 @@ function shareNativeInterface({ params }: { params: SharingParams }) {
     imageUrl: image || DEFAULT_IMAGE,
     buttons: [
       {
-        title: '웹에서 보기',
+        title: t('webeseo-bogi'),
         webUrl: webUrl as string,
       },
       {
-        title: '트리플에서 보기',
+        title: t('teuripeuleseo-bogi'),
         webUrl: webUrl as string,
         appUrl,
       },

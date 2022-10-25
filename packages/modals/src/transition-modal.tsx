@@ -1,4 +1,5 @@
 import { ComponentType, FC, useMemo } from 'react'
+import { useTranslation } from 'next-i18next'
 import styled from 'styled-components'
 import { Text } from '@titicaca/core-elements'
 import {
@@ -64,7 +65,7 @@ const MODAL_CONTENT: {
   },
   [TransitionType.View]: {
     description:
-      '일정 짜기부터 호텔, 투어・티켓 예약까지!\n트리플로 한 번에 여행 준비하세요.',
+      'iljeong-jjagibuteo-hotel-tueotikes-yeyagggaji-teuripeulro-han-beone-yeohaeng-junbihaseyo.',
     eventLabel: '컨텐츠_연속보기',
   },
 }
@@ -76,6 +77,8 @@ export function TransitionModal({
   deepLink: string
   onActionClick?: () => void
 }) {
+  const { t } = useTranslation('common-web')
+
   const uriHash = useUriHash()
   const { back } = useHistoryFunctions()
   const { trackEvent } = useEventTrackingContext()
@@ -83,7 +86,7 @@ export function TransitionModal({
 
   if (matchData && Object.keys(MODAL_CONTENT).includes(matchData[1])) {
     const {
-      description = '트리플 앱에서 더욱 다양한 기능을\n편리하게 이용해보세요.',
+      description = 'teuripeul-aebeseo-deoug-dayanghan-gineungeul-pyeonrihage-iyonghaeboseyo.',
       eventLabel = '',
     } = MODAL_CONTENT[matchData[1]] || {}
 
@@ -99,17 +102,17 @@ export function TransitionModal({
             size="small"
             margin={{ bottom: 30, left: 30, right: 30 }}
           >
-            {description}
+            {t(description)}
           </Text>
         ) : null}
 
         <Actions
           negative={{
-            text: '취소',
+            text: t('cwiso'),
             onClick: back,
           }}
           positive={{
-            text: '트리플 가기',
+            text: t('teuripeul-gagi'),
             onClick: () => {
               onActionClick?.()
 

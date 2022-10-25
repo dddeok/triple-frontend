@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import { FlexBox, Text, Container } from '@titicaca/core-elements'
 import styled from 'styled-components'
 import { useState } from 'react'
@@ -59,21 +60,17 @@ const OpenIcon = styled.img`
   margin-left: 4px;
 `
 
-const CloseIcon = styled.img`
-  position: absolute;
-  top: 17px;
-  right: 15px;
-`
-
 export default function RecentCheckBox({
   isRecentReview,
   onRecentReviewChange,
 }: RecentCheckboxProps) {
+  const { t } = useTranslation('common-web')
+
   return (
     <FlexBox flex alignItems="center" position="relative" cursor="pointer">
       <FlexBox flex alignItems="center" onClick={onRecentReviewChange}>
         <CheckBox readOnly type="checkbox" checked={isRecentReview} />
-        <Text size={14}>최근 여행</Text>
+        <Text size={14}>{t('coegeun-yeohaeng')}</Text>
       </FlexBox>
       <ToolTip />
     </FlexBox>
@@ -81,6 +78,8 @@ export default function RecentCheckBox({
 }
 
 function ToolTip() {
+  const { t } = useTranslation('common-web')
+
   const [visible, setVisible] = useState(false)
 
   const { trackEvent } = useEventTrackingContext()
@@ -109,13 +108,9 @@ function ToolTip() {
             color="gray800"
             padding={{ top: 15, left: 15, bottom: 15, right: 37 }}
           >
-            최근 6개월 내에 방문한 여행의 리뷰만 모아 볼 수 있습니다.
-            <CloseIcon
-              width={10}
-              height={10}
-              src="https://assets.triple.guide/images/ico_tooltip_delete.png"
-              onClick={() => setVisible(false)}
-            />
+            {t(
+              'coegeun-6gaeweol-naee-bangmunhan-yeohaengyi-ribyuman-moa-bol-su-issseubnida.',
+            )}
           </TooltipText>
         </TooltipContainer>
       ) : null}

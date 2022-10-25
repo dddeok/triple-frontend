@@ -6,6 +6,7 @@ import {
   useMemo,
   useState,
 } from 'react'
+import { useTranslation } from 'next-i18next'
 import {
   useEventTrackingContext,
   useHistoryFunctions,
@@ -26,6 +27,8 @@ const LoginCtaContext = createContext<
 export function LoginCtaModalProvider({
   children,
 }: PropsWithChildren<unknown>) {
+  const { t } = useTranslation('common-web')
+
   const uriHash = useUriHash()
   const { trackEvent } = useEventTrackingContext()
   const { back, navigate } = useHistoryFunctions()
@@ -43,7 +46,7 @@ export function LoginCtaModalProvider({
 
       <Confirm
         open={open}
-        title="로그인이 필요합니다."
+        title={t('rogeuini-pilyohabnida.')}
         onClose={back}
         onCancel={back}
         onConfirm={() => {
@@ -63,8 +66,7 @@ export function LoginCtaModalProvider({
           return true
         }}
       >
-        로그인하고 트리플을
-        <br />더 편하게 이용하세요🙂
+        {t('rogeuinhago-teuripeuleul-deo-pyeonhage-iyonghaseyo')}
       </Confirm>
     </LoginCtaContext.Provider>
   )

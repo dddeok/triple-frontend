@@ -1,10 +1,10 @@
 import { SyntheticEvent } from 'react'
+import { useTranslation } from 'next-i18next'
 import styled from 'styled-components'
 import { Button, Container, Rating, Text } from '@titicaca/core-elements'
 
 import { ResourceType } from './types'
 
-const DEFAULT_PLACEHOLDER_TEXT = '이곳의 첫 번째 리뷰를 올려주세요.'
 const PlaceholderContainer = styled(Container)`
   width: 100%;
   text-align: center;
@@ -36,7 +36,7 @@ export default function ReviewsPlaceholder({
   hasReviews,
   resourceType,
   recentTrip,
-  placeholderText = DEFAULT_PLACEHOLDER_TEXT,
+  placeholderText,
   onClick,
 }: {
   isMorePage: boolean
@@ -46,6 +46,8 @@ export default function ReviewsPlaceholder({
   placeholderText?: string
   onClick?: (e: SyntheticEvent, rating?: number) => void
 }) {
+  const { t } = useTranslation('common-web')
+
   return (
     <PlaceholderContainer
       margin={{ top: 20 }}
@@ -66,8 +68,12 @@ export default function ReviewsPlaceholder({
           onClick={onClick}
         />
       ) : null}
-      {placeholderText && !recentTrip ? (
-        <DefaultPlaceholder placeholderText={placeholderText} />
+      {!recentTrip ? (
+        <DefaultPlaceholder
+          placeholderText={
+            placeholderText ?? t('igosyi-ceos-beonjjae-ribyureul-olryeojuseyo.')
+          }
+        />
       ) : null}
     </PlaceholderContainer>
   )
@@ -96,6 +102,8 @@ function RecentTripPlaceholder({
   hasReviews: boolean
   onClick?: (e: SyntheticEvent, rating?: number) => void
 }) {
+  const { t } = useTranslation('common-web')
+
   return isMorePage ? (
     <RecentTripContainer>
       <img
@@ -111,19 +119,16 @@ function RecentTripPlaceholder({
         lineHeight="21px"
         textAlign="center"
       >
-        선택한 조건의 <br />
-        리뷰가 없습니다.
+        {t('seontaeghan-jogeonyi-ribyuga-eobsseubnida.')}
       </Text>
       <Text size={14} lineHeight="19px" textAlign="center" color="gray500">
-        다녀온 여행지의
-        <br />
-        리뷰를 남겨보세요.
+        {t('danyeoon-yeohaengjiyi-ribyureul-namgyeoboseyo.')}
       </Text>
     </RecentTripContainer>
   ) : (
     <Container padding={{ top: 60, bottom: 60 }}>
       <Text size={14} color="gray500">
-        선택한 조건의 리뷰가 없습니다.
+        {t('seontaeghan-jogeonyi-ribyuga-eobsseubnida.')}
       </Text>
       {hasReviews ? (
         <NavigateToReviewsListButton
@@ -132,7 +137,7 @@ function RecentTripPlaceholder({
           onClick={onClick}
         >
           <Text size={13} color="white" bold>
-            전체 리뷰 보기
+            {t('jeonce-ribyu-bogi')}
           </Text>
         </NavigateToReviewsListButton>
       ) : null}

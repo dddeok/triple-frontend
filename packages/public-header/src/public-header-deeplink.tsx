@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import { useEventTrackerWithMetadata } from '@titicaca/react-contexts'
 
 import { ExtraActionItem } from './extra-action-item'
@@ -9,6 +10,8 @@ interface Props {
 }
 
 export function PublicHeaderDeeplink({ deeplinkPath }: Props) {
+  const { t } = useTranslation('common-web')
+
   const trackEventWithMetadata = useEventTrackerWithMetadata()
   const deeplinkHref = useDeeplinkHref(deeplinkPath)
 
@@ -26,7 +29,7 @@ export function PublicHeaderDeeplink({ deeplinkPath }: Props) {
           })
         }
       >
-        앱에서 보기
+        {t('aebeseo-bogi')}
       </ExtraActionItem>
     </>
   )

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useCallback, useEffect, useRef } from 'react'
+import { useTranslation } from 'next-i18next'
 import {
   Text,
   MarginPadding,
@@ -52,8 +53,8 @@ export default function FloatingButtonCta({
   exitStrategy = BannerExitStrategy.NONE,
   fixed,
   appInstallLink,
-  title = '트리플 앱 설치하기',
-  description = '가이드북, 일정짜기, 길찾기, 맛집',
+  title,
+  description,
   margin,
   trackEvent,
   trackEventParams,
@@ -64,6 +65,8 @@ export default function FloatingButtonCta({
   zIndex,
   unmountOnExit,
 }: FloatingButtonCtaProps & LayeringMixinProps) {
+  const { t } = useTranslation('common-web')
+
   const [buttonVisibility, setButtonVisibility] = useState(false)
   const [available, setAvailable] = useState(true)
   const floatingButtonContainerRef = useRef<HTMLDivElement>(null)
@@ -79,7 +82,7 @@ export default function FloatingButtonCta({
     let visitedPages = false
 
     try {
-      const storage = getWebStorage('sessionStorage')
+      const storage = getWebStorage({ type: 'sessionStorage', t })
       visitedPages = !!storage.getItem(FLOATING_BUTTON_CLOSED_STORAGE_KEY)
     } catch (error) {
       // 사용자가 이전에 CTA를 닫았었는지 확인합니다.
@@ -89,7 +92,7 @@ export default function FloatingButtonCta({
     if (!visitedPages && !buttonVisibility) {
       setButtonVisibility(true)
     }
-  }, [buttonVisibility])
+  }, [buttonVisibility, t])
 
   useEffect(() => {
     if (buttonVisibility) {
@@ -111,13 +114,13 @@ export default function FloatingButtonCta({
     onDismiss && onDismiss()
 
     try {
-      const storage = getWebStorage('sessionStorage')
+      const storage = getWebStorage({ type: 'sessionStorage', t })
       storage.setItem(FLOATING_BUTTON_CLOSED_STORAGE_KEY, 'true')
     } catch (error) {
       // 사용자가 CTA를 닫았다는 것을 기록합니다.
       // 필수적인 기능이 아니므로 에러를 조용히 넘깁니다.
     }
-  }, [onDismiss, sendTrackEventRequest, trackEventParams])
+  }, [onDismiss, sendTrackEventRequest, trackEventParams, t])
 
   useEffect(() => {
     if (exitStrategy === BannerExitStrategy.CHATBOT_READY) {
@@ -157,7 +160,7 @@ export default function FloatingButtonCta({
             <InstallAnchor href={appInstallLink} onClick={handleClick}>
               <Text size={18} lineHeight="21px" bold color="white">
                 <Text floated="left" color="white">
-                  {title}
+                  {title ?? t('teuripeul-aeb-seolcihagi')}
                 </Text>
                 <GoAppButton src="https://assets.triple.guide/images/ico-arrow@4x.png" />
               </Text>
@@ -167,7 +170,7 @@ export default function FloatingButtonCta({
                 color="white600"
                 margin={{ top: 3 }}
               >
-                {description}
+                {description ?? t('gaideubug-iljeongjjagi-gilcajgi-masjib')}
               </Text>
             </InstallAnchor>
           </Container>

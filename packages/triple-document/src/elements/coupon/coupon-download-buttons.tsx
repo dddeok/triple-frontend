@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
+import { useTranslation } from 'next-i18next'
 import { Button } from '@titicaca/core-elements'
 import styled from 'styled-components'
 import {
@@ -103,6 +104,8 @@ export function CouponDownloadButton({
   enabledAt?: string
   onClick?: () => void
 }) {
+  const { t } = useTranslation('common-web')
+
   const [couponFetched, setCouponFetched] = useState(false)
   const [downloaded, setDownloaded] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | undefined>(
@@ -189,7 +192,7 @@ export function CouponDownloadButton({
         disabled={buttonDisabled}
         onClick={handleCouponDownloadButtonClick}
       >
-        쿠폰 받기
+        {t('kupon-badgi')}
       </BaseCouponDownloadButton>
       <CouponAlertModal identifier={slugId} errorMessage={errorMessage} />
     </>
@@ -262,6 +265,8 @@ export function CouponGroupDownloadButton({
   enabledAt?: string
   onClick?: () => void
 }) {
+  const { t } = useTranslation('common-web')
+
   const [coupons, setCoupons] = useState<CouponData[]>([])
   const [errorMessage, setErrorMessage] = useState<string | undefined>(
     undefined,
@@ -356,7 +361,7 @@ export function CouponGroupDownloadButton({
         disabled={buttonDisabled}
         onClick={handleCouponDownloadButtonClick}
       >
-        쿠폰 받기
+        {t('kupon-badgi')}
       </BaseCouponDownloadButton>
       <CouponAlertModal identifier={groupId} errorMessage={errorMessage} />
     </>

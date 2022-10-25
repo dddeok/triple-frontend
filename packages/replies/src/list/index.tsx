@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import {
   Container,
   HR1,
@@ -35,6 +36,8 @@ export default function ReplyList({
   onReplyDelete: (response: ReplyType) => void
   onReplyEdit: (response: ReplyType) => void
 }) {
+  const { t } = useTranslation('common-web')
+
   const {
     currentMessageId,
     content: { mentioningUserName },
@@ -44,8 +47,8 @@ export default function ReplyList({
   const { showToast } = useTripleClientActions()
 
   const description = mentioningUserName
-    ? '답글을 삭제하시겠습니까?'
-    : '댓글을 삭제하시겠습니까?'
+    ? t('dabgeuleul-sagjehasigessseubnigga')
+    : t('daesgeuleul-sagjehasigessseubnigga')
 
   const handleReplyDelete = async () => {
     const response = await deleteReply({
@@ -60,9 +63,9 @@ export default function ReplyList({
       }
 
       if (showToast) {
-        showToast('삭제되었습니다.')
+        showToast(t('sagjedoeeossseubnida.'))
       } else {
-        alert('삭제되었습니다.')
+        alert(t('sagjedoeeossseubnida.'))
       }
     }
   }
@@ -83,7 +86,7 @@ export default function ReplyList({
               inlineBlock
               onClick={() => fetchMoreReplies()}
             >
-              이전 댓글 더보기
+              {t('ijeon-daesgeul-deobogi')}
             </Text>
           ) : null}
 
@@ -119,6 +122,8 @@ export default function ReplyList({
 }
 
 function ConfirmEditModal({ onConfirm }: { onConfirm: () => void }) {
+  const { t } = useTranslation('common-web')
+
   const uriHash = useUriHash()
   const { back } = useHistoryFunctions()
 
@@ -128,7 +133,9 @@ function ConfirmEditModal({ onConfirm }: { onConfirm: () => void }) {
       onClose={back}
       onConfirm={onConfirm}
     >
-      {`수정을 취소하시겠습니까? \n 수정한 내용은 저장되지 않습니다.`}
+      {t(
+        'sujeongeul-cwisohasigessseubnigga-n-sujeonghan-naeyongeun-jeojangdoeji-anhseubnida.',
+      )}
     </Confirm>
   )
 }

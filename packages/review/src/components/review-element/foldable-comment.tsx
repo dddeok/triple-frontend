@@ -1,4 +1,5 @@
 import { MouseEventHandler } from 'react'
+import { useTranslation } from 'next-i18next'
 import styled from 'styled-components'
 import { findFoldedPosition } from '@titicaca/view-utilities'
 
@@ -49,10 +50,12 @@ function FoldedComment({
   comment: string
   onUnfoldButtonClick: MouseEventHandler<HTMLButtonElement>
 }) {
+  const { t } = useTranslation('common-web')
+
   return (
     <Comment>
       {`${comment} …`}
-      <Unfold onClick={onUnfoldButtonClick}>더보기</Unfold>
+      <Unfold onClick={onUnfoldButtonClick}>{t('deobogi')}</Unfold>
     </Comment>
   )
 }

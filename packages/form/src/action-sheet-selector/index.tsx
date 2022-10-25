@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import styled, { css } from 'styled-components'
 import { Container, Text, withField } from '@titicaca/core-elements'
 import { getColor } from '@titicaca/color-palette'
@@ -44,12 +45,14 @@ function ActionSheetSelector({
   onClose,
   directSelect,
 }: ActionSheetSelectorProps) {
-  const OPTIONS = [
+  const { t } = useTranslation('common-web')
+
+  const sheetOptions = [
     ...(required
       ? []
       : [
           {
-            label: '선택하기',
+            label: t('seontaeghagi'),
             value: null,
           },
         ]),
@@ -63,7 +66,7 @@ function ActionSheetSelector({
       <Container onClick={onOpen}>
         <FieldContainer error={!!error}>
           <Text size="large" alpha={selected ? 1 : 0.5}>
-            {selected ? selected.label : '선택하기'}
+            {selected ? selected.label : t('seontaeghagi')}
           </Text>
           <ArrowDown />
         </FieldContainer>
@@ -73,7 +76,7 @@ function ActionSheetSelector({
         directSelect={directSelect}
         open={open}
         onClose={onClose}
-        options={OPTIONS}
+        options={sheetOptions}
         value={value}
         onSelect={onChange}
       />

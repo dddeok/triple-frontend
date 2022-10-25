@@ -1,4 +1,5 @@
 import { ReactNode, SyntheticEvent } from 'react'
+import { useTranslation } from 'next-i18next'
 import styled from 'styled-components'
 import {
   Container,
@@ -87,6 +88,9 @@ export default function FixedPricingV2({
   maxWidth,
   padding = { top: 14, right: 20, bottom: 14, left: 20 },
 }: FixedPricingV2Props) {
+  const { t } = useTranslation('common-web')
+
+  const formattedSalePrice = formatNumber(salePrice)
   const pricingLabel = label ? (
     typeof label === 'string' ? (
       <Text color="gray" alpha={0.5} size="mini">
@@ -139,7 +143,8 @@ export default function FixedPricingV2({
                       margin={{ bottom: 3 }}
                       color={isSoldOut ? 'gray300' : 'gray'}
                     >
-                      {priceLabelOverride || `${formatNumber(salePrice)}원`}
+                      {priceLabelOverride ||
+                        t('formattedsaleprice-weon', { formattedSalePrice })}
                       {discountRate}
                     </Text>
                     {pricingDescription}

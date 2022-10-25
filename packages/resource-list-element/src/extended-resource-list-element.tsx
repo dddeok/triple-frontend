@@ -1,4 +1,5 @@
 import { MouseEventHandler, PropsWithChildren } from 'react'
+import { useTranslation } from 'next-i18next'
 import styled from 'styled-components'
 import { OverlayScrapButton } from '@titicaca/scrap-button'
 import {
@@ -88,6 +89,8 @@ export default function ExtendedResourceListElement<R extends ResourceMeta>({
   optimized,
   ...props
 }: PropsWithChildren<ResourceListElementProps<R>>) {
+  const { t } = useTranslation('common-web')
+
   const { id, type, scraped } = scrapResource || resource || {}
   const labels = tags || []
   const formattedNames = [partnerName, areaName].filter(Boolean).join(' · ')
@@ -135,7 +138,7 @@ export default function ExtendedResourceListElement<R extends ResourceMeta>({
                   margin={{ right: 5 }}
                   verticalAlign="middle"
                 >
-                  광고
+                  {t('gwanggo')}
                 </Label>
               ) : null}
               {distance || distance === 0 ? (

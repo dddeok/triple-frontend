@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import { Section } from '@titicaca/core-elements'
 import { useEventTrackingContext } from '@titicaca/react-contexts'
 import { useNavigate } from '@titicaca/router'
@@ -21,6 +22,8 @@ export default function SocialReviews({
   socialReviews,
   ...props
 }: SocialReviewsProps) {
+  const { t } = useTranslation('common-web')
+
   const { trackSimpleEvent } = useEventTrackingContext()
   const navigate = useNavigate()
 
@@ -30,7 +33,7 @@ export default function SocialReviews({
 
   return (
     <ExternalLinks
-      title="소셜 리뷰"
+      title={t('sosyeol-ribyu')}
       externalLinks={socialReviews.map(
         ({ imageUrl, publisher: meta, title, url }) => ({
           data: url,

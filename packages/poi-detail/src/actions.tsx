@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import styled from 'styled-components'
 import {
   Section,
@@ -63,6 +64,7 @@ export default function Actions({
     )
     webStorage.setItem(REVIEW_TOOLTIP_EXPOSED, 'true')
   }, [])
+  const { t } = useTranslation('common-web')
 
   return (
     <Section {...props}>
@@ -79,12 +81,12 @@ export default function Actions({
             icon={scraped ? 'saveFilled' : 'saveEmpty'}
             onClick={onScrapedChange}
           >
-            {scraped ? '저장취소' : '저장하기'}
+            {scraped ? t('jeojangcwiso') : t('jeojanghagi')}
           </ActionButton>
         ) : null}
         {onScheduleAdd ? (
           <ActionButton icon="schedule" onClick={onScheduleAdd}>
-            일정추가
+            {t('iljeongcuga')}
           </ActionButton>
         ) : null}
         <ActionButton
@@ -104,12 +106,10 @@ export default function Actions({
               positioning={{ top: -26 }}
             />
           ) : null}
-          {reviewed
-            ? t('common:modReview', '리뷰수정')
-            : t('common:addReview', '리뷰쓰기')}
+          {reviewed ? t('ribyusujeong') : t('ribyusseugi')}
         </ActionButton>
         <ActionButton icon="share" onClick={onContentShare}>
-          공유하기
+          {t('gongyuhagi')}
         </ActionButton>
       </Button.Group>
       {!noDivider && <HR1 margin={{ top: 8, bottom: 0 }} />}

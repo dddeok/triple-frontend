@@ -1,4 +1,5 @@
 import { SyntheticEvent } from 'react'
+import { useTranslation } from 'next-i18next'
 import styled, { css } from 'styled-components'
 import { getColor } from '@titicaca/color-palette'
 
@@ -44,6 +45,8 @@ const GenderContainer = styled.div<{
 `
 
 function GenderSelector({ name, value, onChange }: GenderSelectorProps) {
+  const { t } = useTranslation('common-web')
+
   return (
     <Container>
       <GenderContainer
@@ -52,7 +55,7 @@ function GenderSelector({ name, value, onChange }: GenderSelectorProps) {
         selected={value === 'MALE'}
         onClick={(e: SyntheticEvent) => onChange && onChange(e, 'MALE')}
       >
-        남자
+        {t('namja')}
       </GenderContainer>
 
       <GenderContainer
@@ -61,7 +64,7 @@ function GenderSelector({ name, value, onChange }: GenderSelectorProps) {
         selected={value === 'FEMALE'}
         onClick={(e: SyntheticEvent) => onChange && onChange(e, 'FEMALE')}
       >
-        여자
+        {t('yeoja')}
       </GenderContainer>
     </Container>
   )

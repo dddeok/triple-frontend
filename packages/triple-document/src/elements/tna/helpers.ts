@@ -1,3 +1,4 @@
+import { TFunction } from 'next-i18next'
 import { formatNumber } from '@titicaca/view-utilities'
 
 import { TnaCoupon } from './types'
@@ -5,9 +6,11 @@ import { TnaCoupon } from './types'
 export function generateCoupon({
   applicableCoupon,
   expectedApplicableCoupon,
+  t,
 }: {
   applicableCoupon?: TnaCoupon
   expectedApplicableCoupon?: TnaCoupon
+  t: TFunction
 }) {
   const { amountAfterUsingCoupon: applicableAmountAfterUsingCoupon } =
     applicableCoupon || {}
@@ -17,8 +20,15 @@ export function generateCoupon({
     !applicableCoupon && !!expectedApplicableCoupon
   const hasAmountAfterUsingCouponPrice =
     applicableAmountAfterUsingCoupon && applicableAmountAfterUsingCoupon > 0
+
+  const formattedApplicableAmountAfterUsingCoupon = formatNumber(
+    applicableAmountAfterUsingCoupon,
+  )
   const displayPricePolicy =
-    applicableCoupon && `${formatNumber(applicableAmountAfterUsingCoupon)}원`
+    applicableCoupon &&
+    t('formattedapplicableamountafterusingcoupon-weon', {
+      formattedApplicableAmountAfterUsingCoupon,
+    })
 
   return {
     hasCoupon,

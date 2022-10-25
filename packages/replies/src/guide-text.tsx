@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import { FlexBox, Text, Icon } from '@titicaca/core-elements'
 import { useHistoryFunctions } from '@titicaca/react-contexts'
 
@@ -6,6 +7,8 @@ import { useRepliesContext } from './context'
 const HASH_EDIT_CLOSE_MODAL = 'reply.edit-close-modal'
 
 export default function GuideText() {
+  const { t } = useTranslation('common-web')
+
   const {
     currentMessageId,
     parentMessageId,
@@ -32,10 +35,15 @@ export default function GuideText() {
         >
           <Text size={12} lineHeight="19px" bold color="gray700">
             {!currentMessageId
-              ? `${mentioningUserName}님께 답글 작성 중`
+              ? t('mentioningusername-nimgge-dabgeul-jagseong-jung', {
+                  mentioningUserName,
+                })
               : currentMessageId === parentMessageId
-              ? '댓글 수정 중'
-              : `${mentioningUserName}님에게 작성한 답글 수정 중`}
+              ? t('daesgeul-sujeong-jung')
+              : t(
+                  'mentioningusername-nimege-jagseonghan-dabgeul-sujeong-jung',
+                  { mentioningUserName },
+                )}
           </Text>
 
           <Icon

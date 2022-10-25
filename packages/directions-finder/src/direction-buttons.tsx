@@ -1,4 +1,5 @@
 import { useCallback } from 'react'
+import { useTranslation } from 'next-i18next'
 import {
   useEventTrackingContext,
   useHistoryFunctions,
@@ -25,6 +26,8 @@ export default function DirectionButtons({
   phoneNumber?: string
   isDomestic?: boolean
 }) {
+  const { t } = useTranslation('common-web')
+
   const app = useTripleClientMetadata()
   const uriHash = useUriHash()
   const { push, back, showTransitionModal } = useHistoryFunctions()
@@ -46,7 +49,7 @@ export default function DirectionButtons({
             size="small"
             onClick={handleAskToLocalsClick}
           >
-            현지에서 길묻기
+            {t('hyeonjieseo-gilmudgi')}
           </Button>
         ) : null}
         <Button
@@ -56,7 +59,7 @@ export default function DirectionButtons({
           size="small"
           onClick={onDirectionsClick}
         >
-          길찾기
+          {t('gilcajgi')}
         </Button>
       </Button.Group>
 

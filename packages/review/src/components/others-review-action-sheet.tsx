@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import ActionSheet from '@titicaca/action-sheet'
 import { useUriHash, useHistoryFunctions } from '@titicaca/react-contexts'
 
@@ -13,6 +14,8 @@ export default function OthersReviewActionSheet({
   selectedReview?: ReviewData | null
   onReportReview: (reportingReviewId: string) => void
 }) {
+  const { t } = useTranslation('common-web')
+
   const uriHash = useUriHash()
   const { back } = useHistoryFunctions()
 
@@ -31,7 +34,7 @@ export default function OthersReviewActionSheet({
       zTier={3}
     >
       <ActionSheet.Item icon="report" onClick={handleReportClick}>
-        신고하기
+        {t('singohagi')}
       </ActionSheet.Item>
     </ActionSheet>
   )

@@ -1,15 +1,14 @@
-import { generateUrl, parseUrl, UrlElements } from '@titicaca/view-utilities'
+import { generateUrl, parseUrl } from '@titicaca/view-utilities'
 
 import { createShareUrl } from './services/share'
+import { WebActionParams } from './types'
 
-const ALERT_MESSAGE = '링크를 복사했습니다.'
-
-export default async function share({ path }: UrlElements) {
+export default async function share({ url: { path }, t }: WebActionParams) {
   if (path === '/web-action/share') {
     const params = getSharingParams()
     const shareUrl = createShareUrl()
 
-    shareUrl({ params, message: ALERT_MESSAGE })
+    shareUrl({ params, message: t('ringkeureul-bogsahaessseubnida.'), t })
 
     return true
   }

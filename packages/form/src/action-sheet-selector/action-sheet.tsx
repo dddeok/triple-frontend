@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useTranslation } from 'next-i18next'
 import ActionSheet from '@titicaca/action-sheet'
 import DrawerButton from '@titicaca/drawer-button'
 
@@ -23,6 +24,8 @@ export default function ActionSheetWrapper({
   value: selectedValue,
   directSelect,
 }: ActionSheetProps) {
+  const { t } = useTranslation('common-web')
+
   const [selectedOption, setSelectedOption] = useState<Option | null>(null)
 
   useEffect(() => {
@@ -76,7 +79,7 @@ export default function ActionSheetWrapper({
             }
           }}
         >
-          선택완료
+          {t('seontaegwanryo')}
         </DrawerButton>
       )}
     </>

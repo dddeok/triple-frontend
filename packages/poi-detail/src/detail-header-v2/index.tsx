@@ -1,4 +1,5 @@
 import { useCallback } from 'react'
+import { useTranslation } from 'next-i18next'
 import styled from 'styled-components'
 import {
   Section,
@@ -76,6 +77,8 @@ export default function DetailHeaderV2({
    */
   vicinity?: string
 } & Parameters<typeof Section>['0']) {
+  const { t } = useTranslation('common-web')
+
   const app = useTripleClientMetadata()
   const uriHash = useUriHash()
   const { push, back } = useHistoryFunctions()
@@ -111,7 +114,7 @@ export default function DetailHeaderV2({
                 <Rating score={reviewsRating} />
                 {reviewsCount > 0 && ` ${formatNumber(reviewsCount)}`}
                 <ArrowButton onClick={onReviewsRatingClick}>
-                  리뷰보기
+                  {t('ribyubogi')}
                 </ArrowButton>
               </Text>
             ) : null}
@@ -123,7 +126,7 @@ export default function DetailHeaderV2({
           vicinity={vicinity}
           arrowAction={
             onAreaClick ? (
-              <ArrowButton onClick={onAreaClick}>지도보기</ArrowButton>
+              <ArrowButton onClick={onAreaClick}>{t('jidobogi')}</ArrowButton>
             ) : null
           }
         />

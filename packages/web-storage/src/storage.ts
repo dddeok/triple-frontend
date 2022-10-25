@@ -1,4 +1,5 @@
 import Cookies from 'universal-cookie'
+import { TFunction } from 'next-i18next'
 
 import {
   storageAvailable,
@@ -14,9 +15,15 @@ function addCookieKeyPrefix(key: string) {
   return `${COOKIE_KEY_PREFIX}/${key}`
 }
 
-function getCookieStorage({ storageType }: { storageType: WebStorageType }) {
+function getCookieStorage({
+  storageType,
+  t,
+}: {
+  storageType: WebStorageType
+  t: TFunction
+}) {
   if (!cookieAvailable()) {
-    throw new WebStorageError({ type: 'unavailable', storageType })
+    throw new WebStorageError({ type: 'unavailable', storageType, t })
   }
 
   const cookie = new Cookies()
@@ -48,6 +55,7 @@ function getCookieStorage({ storageType }: { storageType: WebStorageType }) {
           throw new WebStorageError({
             type: 'quotaExceeded',
             storageType,
+            t,
           })
         }
 
@@ -67,13 +75,19 @@ function getCookieStorage({ storageType }: { storageType: WebStorageType }) {
   }
 }
 
-export function getWebStorage(type: WebStorageType = 'localStorage') {
+export function getWebStorage({
+  type = 'localStorage',
+  t,
+}: {
+  type?: WebStorageType
+  t: TFunction
+}) {
   if (typeof window === 'undefined') {
-    throw new WebStorageError({ type: 'notBrowser', storageType: type })
+    throw new WebStorageError({ type: 'notBrowser', storageType: type, t })
   }
 
   if (!storageAvailable(type)) {
-    return getCookieStorage({ storageType: type })
+    return getCookieStorage({ storageType: type, t })
   }
 
   const storage = window[type]
@@ -99,6 +113,7 @@ export function getWebStorage(type: WebStorageType = 'localStorage') {
           throw new WebStorageError({
             type: 'quotaExceeded',
             storageType: type,
+            t,
           })
         }
 
