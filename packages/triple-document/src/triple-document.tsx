@@ -1,4 +1,5 @@
 import { useMemo, useCallback } from 'react'
+import { useTranslation } from 'next-i18next'
 import { useEventTrackerWithMetadata } from '@titicaca/react-contexts'
 import { initialize } from '@titicaca/standard-action-handler'
 import { useNavigate, useExternalRouter } from '@titicaca/router'
@@ -39,6 +40,7 @@ export function TripleDocument({
   children: TripleElementData[]
   cta?: string
 } & TripleDocumentContext) {
+  const { t } = useTranslation('common-web')
   const trackEventWithMetadata = useEventTrackerWithMetadata()
   const trackResourceEvent = useEventResourceTracker()
   const navigate = useNavigate()
@@ -46,12 +48,15 @@ export function TripleDocument({
 
   const handleAction = useMemo(
     () =>
-      initialize({
-        cta,
-        navigate: navigate as ContextOptions['navigate'],
-        routeExternally,
-      }),
-    [cta, navigate, routeExternally],
+      initialize(
+        {
+          cta,
+          navigate: navigate as ContextOptions['navigate'],
+          routeExternally,
+        },
+        t,
+      ),
+    [cta, navigate, routeExternally, t],
   )
 
   const defaultHandleLinkClick: LinkEventHandler = useCallback(
