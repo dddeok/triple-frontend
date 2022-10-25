@@ -41,6 +41,7 @@
   "peerDependencies": {
     "react": "*",
     "react-dom": "*",
-    "styled-components": ">=4.4.1 < 6"
+    "styled-components": ">=4.4.1 < 6",
+    "next-i18next": "*"
   }
 }

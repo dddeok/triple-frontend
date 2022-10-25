@@ -31,5 +31,8 @@
   "devDependencies": {
     "@types/haversine": "^1.1.4",
     "@types/humps": "^2.0.0"
+  },
+  "peerDependencies": {
+    "next-i18next": "*"
   }
 }

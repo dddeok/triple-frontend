@@ -26,5 +26,8 @@
     "@titicaca/core-elements": "^10.2.0",
     "@titicaca/drawer-button": "^10.2.0",
     "react-input-mask": "^2.0.4"
+  },
+  "peerDependencies": {
+    "next-i18next": "*"
   }
 }

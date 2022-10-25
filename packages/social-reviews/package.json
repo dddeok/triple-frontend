@@ -28,6 +28,7 @@
     "react-i18next": "^11.3.3"
   },
   "peerDependencies": {
-    "@titicaca/react-contexts": "*"
+    "@titicaca/react-contexts": "*",
+    "next-i18next": "*"
   }
 }

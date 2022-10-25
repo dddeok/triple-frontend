@@ -26,6 +26,7 @@
   },
   "peerDependencies": {
     "@titicaca/modals": "*",
-    "react": "*"
+    "react": "*",
+    "next-i18next": "*"
   }
 }

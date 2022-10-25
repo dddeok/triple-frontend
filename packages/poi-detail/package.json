@@ -37,6 +37,7 @@
     "qs": "^6.10.1"
   },
   "peerDependencies": {
-    "@titicaca/react-contexts": "*"
+    "@titicaca/react-contexts": "*",
+    "next-i18next": "*"
   }
 }

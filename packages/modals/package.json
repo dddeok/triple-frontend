@@ -24,6 +24,7 @@
     "@titicaca/core-elements": "^10.2.0"
   },
   "peerDependencies": {
-    "@titicaca/react-contexts": "*"
+    "@titicaca/react-contexts": "*",
+    "next-i18next": "*"
   }
 }

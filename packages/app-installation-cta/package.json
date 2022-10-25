@@ -36,6 +36,7 @@
     "@types/react-transition-group": "^4.4.4"
   },
   "peerDependencies": {
-    "@titicaca/web-storage": "*"
+    "@titicaca/web-storage": "*",
+    "next-i18next": "*"
   }
 }
