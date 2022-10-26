@@ -4,6 +4,7 @@ module.exports = {
     '@storybook/addon-essentials',
     '@storybook/addon-links',
     'storybook-addon-next-router',
+    'storybook-react-i18next',
   ],
   typescript: {
     check: true,
