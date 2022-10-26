@@ -22,18 +22,9 @@ export class WebStorageError extends CustomError {
     t: TFunction
   }) {
     const messageMap: { [key in ErrorType]: string } = {
-      notBrowser: t(
-        'beuraujeo-hwangyeongil-ddaeman-webstorage-apireul-sayonghal-su-issseubnida.',
-      ),
-      unavailable: t('storagetype-e-jeobgeunhal-su-eobsseubnida.', {
-        storageType,
-      }),
-      quotaExceeded: t(
-        'storagetype-yi-heoyongdoen-yongryangeul-modu-sayonghaessseubnida.',
-        {
-          storageType,
-        },
-      ),
+      notBrowser: '브라우저 환경일 때만 WebStorage API를 사용할 수 있습니다.',
+      unavailable: `${storageType}에 접근할 수 없습니다.`,
+      quotaExceeded: `${storageType}의 허용된 용량을 모두 사용했습니다.`,
     }
 
     super(messageMap[type])
