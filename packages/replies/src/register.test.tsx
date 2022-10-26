@@ -22,7 +22,7 @@ describe('Reply 등록 버튼을 테스트합니다.', () => {
       { wrapper: ReplyWithLoginWrapper },
     )
 
-    const registerButtonElement = getByRole('button', { name: /등록/ })
+    const registerButtonElement = getByRole('button', { name: /deungrog/ })
 
     expect(registerButtonElement).toHaveStyleRule(
       'color',
@@ -48,7 +48,7 @@ describe('Reply 등록 버튼을 테스트합니다.', () => {
 
     fireEvent.change(textareaElement, { target: { value: 'Hi' } })
 
-    const registerButtonElement = getByRole('button', { name: /등록/ })
+    const registerButtonElement = getByRole('button', { name: /deungrog/ })
 
     expect(registerButtonElement).toHaveStyleRule('color', 'var(--color-blue)')
   })

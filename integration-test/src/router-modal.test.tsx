@@ -55,7 +55,7 @@ test('브라우저를 허용하지 않는 링크라면 브라우저 환경에서
   const dialog = getByRole('dialog')
 
   expect(assign).not.toBeCalled()
-  expect(dialog).toHaveTextContent('트리플 가기')
+  expect(dialog).toHaveTextContent(/teuripeul-gagi/)
 })
 
 test('로그인한 앱에서만 열리는 링크라면 로그인하지 않은 앱 환경에서 클릭했을 때 링크를 열지않고 로그인 유도 모달을 표시합니다.', () => {
@@ -95,7 +95,7 @@ test('로그인한 앱에서만 열리는 링크라면 로그인하지 않은 �
   const dialog = getByRole('dialog')
 
   expect(assign).not.toBeCalled()
-  expect(dialog).toHaveTextContent('로그인이 필요합니다.')
+  expect(dialog).toHaveTextContent(/rogeuini-pilyohabnida\./)
 })
 
 function EnvProviderWrapper({ children }: PropsWithChildren<unknown>) {

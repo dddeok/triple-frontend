@@ -9,9 +9,24 @@ import { RepliesProvider } from './context'
 import Reply from './list/reply'
 import { Reply as ReplyType } from './types'
 
+interface I18nExpressions {
+  likeReactionCount: number
+}
+
 jest.mock('@titicaca/router')
 jest.mock('@titicaca/ui-flow')
 jest.mock('./replies-api-client')
+jest.mock('next-i18next', () => ({
+  useTranslation: () => ({
+    t: (key: string, data: I18nExpressions) => {
+      if (key === 'johayo-likereactioncount') {
+        return `좋아요 ${data.likeReactionCount}`
+      }
+
+      return key
+    },
+  }),
+}))
 
 beforeEach(() => {
   ;(
