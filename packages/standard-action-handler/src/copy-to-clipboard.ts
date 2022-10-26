@@ -4,13 +4,13 @@ import { createClipboardCopier } from './services/copy'
 import { WebActionParams } from './types'
 
 export default async function copyToClipboard({
-  url: { query, path },
+  url: { query, path } = {},
   t,
 }: WebActionParams) {
   if (path === '/web-action/copy-to-clipboard' && query) {
     const { text } = qs.parse(query || '') as { text?: string }
 
-    if (text) {
+    if (text && t) {
       const textClipboardCopier = createClipboardCopier()
 
       textClipboardCopier({

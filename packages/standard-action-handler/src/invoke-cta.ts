@@ -1,11 +1,11 @@
 import { WebActionParams } from './types'
 
 export default async function invokeCta({
-  url: { path },
-  options: { navigate, cta },
+  url: { path } = {},
+  options: { navigate, cta } = {},
 }: WebActionParams) {
   if (path === '/web-action/cta') {
-    if (cta) {
+    if (cta && navigate) {
       navigate(cta)
 
       return true

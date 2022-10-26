@@ -3,8 +3,11 @@ import { generateUrl, parseUrl } from '@titicaca/view-utilities'
 import { createShareUrl } from './services/share'
 import { WebActionParams } from './types'
 
-export default async function share({ url: { path }, t }: WebActionParams) {
-  if (path === '/web-action/share') {
+export default async function share({
+  url: { path } = {},
+  t,
+}: WebActionParams) {
+  if (path === '/web-action/share' && t) {
     const params = getSharingParams()
     const shareUrl = createShareUrl()
 

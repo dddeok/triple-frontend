@@ -3,7 +3,7 @@ import qs from 'qs'
 import { WebActionParams } from './types'
 
 export default async function fetchApi({
-  url: { path, query },
+  url: { path, query } = {},
 }: WebActionParams) {
   if (path === '/web-action/fetch-api' && query) {
     const {

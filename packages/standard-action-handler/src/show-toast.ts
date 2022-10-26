@@ -4,7 +4,7 @@ import { showToast as nativeShowToast } from '@titicaca/triple-web-to-native-int
 import { WebActionParams } from './types'
 
 export default async function showToast({
-  url: { path, query },
+  url: { path, query } = {},
 }: WebActionParams) {
   if (path === '/web-action/show-toast' && query) {
     const { text } = qs.parse(query, { ignoreQueryPrefix: true })

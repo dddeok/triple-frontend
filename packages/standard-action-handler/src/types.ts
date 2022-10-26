@@ -12,7 +12,7 @@ type TargetType = 'current' | 'new' | 'browser'
 
 export interface ContextOptions {
   cta?: string
-  navigate: (
+  navigate?: (
     rawHref: string,
     params?: NavigateOptions,
   ) => string | undefined | void
@@ -27,12 +27,12 @@ export interface ContextOptions {
 }
 
 export interface WebActionParams {
-  url: UrlElements
-  options: ContextOptions
-  handler: {
+  url?: UrlElements
+  options?: ContextOptions
+  handler?: {
     execute: (url: string, params?: NavigateOptions) => Promise<void>
   }
-  t: TFunction
+  t?: TFunction
 }
 
 export type WebAction = (webActionParams: WebActionParams) => Promise<boolean>

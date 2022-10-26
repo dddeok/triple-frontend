@@ -4,8 +4,8 @@ import { scrollToElement as scrollTo } from '@titicaca/scroll-to-element'
 import { WebActionParams } from './types'
 
 export default async function scrollToElement({
-  url: { path, query },
-  options: { app },
+  url: { path, query } = {},
+  options: { app } = {},
 }: WebActionParams) {
   if (path === '/web-action/scroll-to-element' && query) {
     const { hash } = qs.parse(query) as {
