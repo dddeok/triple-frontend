@@ -11,6 +11,14 @@ module.exports = {
   core: {
     builder: 'webpack5',
   },
+  webpackFinal: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      'next-i18next': 'react-i18next',
+    }
+
+    return config
+  },
   features: {
     postcss: false,
     babelModeV7: true,
