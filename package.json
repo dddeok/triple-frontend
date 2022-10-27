@@ -10,7 +10,6 @@
     "watch:resources": "node scripts/build-watch",
     "watch:declarations": "npm run build-declarations -- --watch",
     "build": "FORCE_COLOR=1 turbo run build && npm run build-declarations",
-    "build:ci": "FORCE_COLOR=1 turbo run build:ci && npm run build-declarations",
     "build-declarations": "tsc -b packages/*/tsconfig.build.json",
     "test": "jest",
     "test:ci": "jest --ci",

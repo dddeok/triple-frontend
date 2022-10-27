@@ -5,8 +5,9 @@ import {
   UserInfoInterface,
   OtherUnreadInterface,
   UserType,
-} from './types'
-import { getProfileImageUrl } from './utils/image'
+} from '../types'
+import { getProfileImageUrl } from '../utils/image'
+
 import { ChatBubbleUI, ChatBubbleUIProps } from './chat-bubble-ui'
 
 interface Props

@@ -2,7 +2,7 @@ const createConfig = require('@titicaca/eslint-config-triple/create-config')
 
 const { overrides, ...rest } = createConfig({
   type: 'frontend',
-  project: ['./packages/*/tsconfig.json', './tsconfig.json'],
+  project: ['./packages/*/tsconfig.build.json', './tsconfig.json'],
   tsconfigRootDir: __dirname,
   enableTypeCheck: false,
   allowedNames: [

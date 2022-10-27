@@ -19,7 +19,7 @@ export const MAX_CHAT_IMAGE_WIDTH = 224
 
 export function generatePreviewImage({
   imageInfo,
-  customWidth,
+  customWidth = MAX_CHAT_IMAGE_WIDTH,
   mediaUrlBase,
   cloudinaryName,
 }: {
@@ -32,6 +32,6 @@ export function generatePreviewImage({
 
   return `${mediaUrlBase}/${cloudinaryName}/image/upload/c_fill,w_${Math.min(
     width,
-    customWidth || MAX_CHAT_IMAGE_WIDTH,
+    customWidth,
   )},q_auto,f_auto/${cloudinaryId}.jpeg`
 }

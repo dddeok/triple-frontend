@@ -8,9 +8,10 @@ import {
   RichPayload,
   MetaDataInterface,
   MessageType,
-} from './types'
+} from '../types'
+import { ImageBubble, TextBubble, RichBubble } from '../bubbles'
+
 import { BubbleInfo } from './bubble-info'
-import { ImageBubble, TextBubble, RichBubble } from './bubbles'
 import {
   ChatContainer,
   SendingFailureHandlerContainer,
