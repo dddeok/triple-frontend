@@ -11,11 +11,6 @@ export interface SortingOptionsProps {
 export const ORDER_BY_RECOMMENDATION = ''
 export const ORDER_BY_RECENCY = 'latest'
 
-const SORTING_OPTIONS = [
-  { key: ORDER_BY_RECOMMENDATION, text: 'cuceonsun' },
-  { key: ORDER_BY_RECENCY, text: 'coesinsun' },
-]
-
 const OptionsContainer = styled(FlexBox)`
   padding: 0;
 
@@ -30,12 +25,17 @@ export default function SortingOptions({
 }: SortingOptionsProps) {
   const { t } = useTranslation('common-web')
 
+  const sortingOptions = [
+    { key: ORDER_BY_RECOMMENDATION, text: t('cuceonsun') },
+    { key: ORDER_BY_RECENCY, text: t('coesinsun') },
+  ]
+
   return (
     <OptionsContainer flex alignItems="center">
-      {SORTING_OPTIONS.map(({ key, text }) => (
+      {sortingOptions.map(({ key, text }) => (
         <Label key={key} radio selected={selected === key}>
           {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
-          <span onClick={onSelect && ((e) => onSelect(e, key))}>{t(text)}</span>
+          <span onClick={onSelect && ((e) => onSelect(e, key))}>{text}</span>
         </Label>
       ))}
     </OptionsContainer>
