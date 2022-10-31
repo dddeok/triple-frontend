@@ -24,25 +24,6 @@ const MODAL_HASHES = [
   HASH_ALREADY_DOWNLOAD_COUPON,
 ]
 
-const TITLE_TYPES: HashKeyValue = {
-  [HASH_ALREADY_DOWNLOAD_COUPON]: 'imi-badeun-kuponibnida.',
-  [HASH_COMPLETE_DOWNLOAD_COUPON]: 'kupon-badgi-wanryo',
-  [HASH_COMPLETE_DOWNLOAD_COUPON_GROUP]: 'kupon-badgi-wanryo',
-  [HASH_COMPLETE_DOWNLOAD_PART_OF_COUPON_GROUP]: 'kupon-badgi-wanryo',
-}
-
-const MESSAGE_TYPES: HashKeyValue = {
-  [HASH_COMPLETE_DOWNLOAD_COUPON]:
-    'kuponeul-badassseubnida-kuponhameseo-hwaginhal-su-isseoyo~',
-
-  [HASH_COMPLETE_DOWNLOAD_COUPON_GROUP]:
-    'kuponeul-modu-badassseubnida.-kuponhameseo-hwaginhal-su-isseoyo~',
-
-  [HASH_ALREADY_DOWNLOAD_COUPON]: 'kuponhameseo-kuponeul-hwaginhaseyo.',
-  [HASH_COMPLETE_DOWNLOAD_PART_OF_COUPON_GROUP]:
-    'kuponeul-modu-badassseubnida.-imi-badeun-kupon-jeoe-kuponhameseo-hwaginhal-su-isseoyo~',
-}
-
 const ICON_TYPES: HashKeyValue = {
   [HASH_COMPLETE_DOWNLOAD_COUPON]:
     'https://assets.triple.guide/images/img-popup-coupon@3x.png',
@@ -50,13 +31,6 @@ const ICON_TYPES: HashKeyValue = {
     'https://assets.triple.guide/images/img-popup-coupon@3x.png',
   [HASH_COMPLETE_DOWNLOAD_PART_OF_COUPON_GROUP]:
     'https://assets.triple.guide/images/img-popup-coupon@3x.png',
-}
-
-const CONFIRM_MESSAGE_TYPES: HashKeyValue = {
-  [HASH_ALREADY_DOWNLOAD_COUPON]: 'kuponham-gagi',
-  [HASH_COMPLETE_DOWNLOAD_COUPON]: 'kupon-hwagin',
-  [HASH_COMPLETE_DOWNLOAD_COUPON_GROUP]: 'kupon-hwagin',
-  [HASH_COMPLETE_DOWNLOAD_PART_OF_COUPON_GROUP]: 'kupon-hwagin',
 }
 
 const CouponIcon = styled.img`
@@ -74,6 +48,35 @@ export function CouponModal({ identifier }: { identifier: string }) {
   const navigate = useNavigate()
 
   const modalHash = uriHash.replace(`${identifier}.`, '')
+
+  const titleTypes: HashKeyValue = {
+    [HASH_ALREADY_DOWNLOAD_COUPON]: t('imi-badeun-kuponibnida.'),
+    [HASH_COMPLETE_DOWNLOAD_COUPON]: t('kupon-badgi-wanryo'),
+    [HASH_COMPLETE_DOWNLOAD_COUPON_GROUP]: t('kupon-badgi-wanryo'),
+    [HASH_COMPLETE_DOWNLOAD_PART_OF_COUPON_GROUP]: t('kupon-badgi-wanryo'),
+  }
+
+  const messageTypes: HashKeyValue = {
+    [HASH_COMPLETE_DOWNLOAD_COUPON]: t(
+      'kuponeul-badassseubnida-kuponhameseo-hwaginhal-su-isseoyo~',
+    ),
+
+    [HASH_COMPLETE_DOWNLOAD_COUPON_GROUP]: t(
+      'kuponeul-modu-badassseubnida.-kuponhameseo-hwaginhal-su-isseoyo~',
+    ),
+
+    [HASH_ALREADY_DOWNLOAD_COUPON]: t('kuponhameseo-kuponeul-hwaginhaseyo.'),
+    [HASH_COMPLETE_DOWNLOAD_PART_OF_COUPON_GROUP]: t(
+      'kuponeul-modu-badassseubnida.-imi-badeun-kupon-jeoe-kuponhameseo-hwaginhal-su-isseoyo~',
+    ),
+  }
+
+  const confirmMessageTypes: HashKeyValue = {
+    [HASH_ALREADY_DOWNLOAD_COUPON]: t('kuponham-gagi'),
+    [HASH_COMPLETE_DOWNLOAD_COUPON]: t('kupon-hwagin'),
+    [HASH_COMPLETE_DOWNLOAD_COUPON_GROUP]: t('kupon-hwagin'),
+    [HASH_COMPLETE_DOWNLOAD_PART_OF_COUPON_GROUP]: t('kupon-hwagin'),
+  }
 
   return (
     <Modal
@@ -96,7 +99,7 @@ export function CouponModal({ identifier }: { identifier: string }) {
           bottom: 10,
         }}
       >
-        {t(TITLE_TYPES[modalHash])}
+        {titleTypes[modalHash]}
       </Text>
       <Text
         center
@@ -110,7 +113,7 @@ export function CouponModal({ identifier }: { identifier: string }) {
         }}
         alpha={0.7}
       >
-        {t(MESSAGE_TYPES[modalHash])}
+        {messageTypes[modalHash]}
       </Text>
 
       <Modal.Actions>
@@ -128,7 +131,7 @@ export function CouponModal({ identifier }: { identifier: string }) {
             )
           }}
         >
-          {t(CONFIRM_MESSAGE_TYPES[modalHash])}
+          {confirmMessageTypes[modalHash]}
         </Modal.Action>
       </Modal.Actions>
     </Modal>
