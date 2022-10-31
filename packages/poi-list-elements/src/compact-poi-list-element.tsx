@@ -13,7 +13,7 @@ import {
   ActionButtonElement,
   PoiListElementType,
 } from './types'
-import { TYPE_NAMES } from './constants'
+import { getTypeNames } from './get-type-names'
 
 interface CompactPoiListElementBaseProps<T extends PoiListElementType>
   extends PoiListElementBaseProps<T> {
@@ -78,7 +78,7 @@ export function CompactPoiListElement<T extends PoiListElementType>({
       </Text>
       <Text size="tiny" alpha={0.7} margin={{ top: 4, left: 50 }}>
         {[
-          t(TYPE_NAMES[type]),
+          getTypeNames({ type, t }),
           regionName
             ? areas?.[0]?.name
               ? `${regionName}(${areas?.[0]?.name})`

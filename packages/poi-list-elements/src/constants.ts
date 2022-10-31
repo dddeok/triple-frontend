@@ -8,8 +8,3 @@ export const POI_IMAGE_PLACEHOLDERS: {
   hotel: 'https://assets.triple.guide/images/ico_blank_hotel@2x.png',
 }
 
-export const TYPE_NAMES: { [key in PoiListElementType['type']]: string } = {
-  attraction: 'gwangwangmyeongso',
-  restaurant: 'eumsigjeom',
-  hotel: 'hotel',
-}

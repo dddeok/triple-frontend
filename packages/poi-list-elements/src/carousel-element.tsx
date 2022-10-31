@@ -10,7 +10,8 @@ import {
 import { OverlayScrapButton } from '@titicaca/scrap-button'
 import { FrameRatioAndSizes } from '@titicaca/type-definitions'
 
-import { POI_IMAGE_PLACEHOLDERS, TYPE_NAMES } from './constants'
+import { POI_IMAGE_PLACEHOLDERS } from './constants'
+import { getTypeNames } from './get-type-names'
 import {
   PoiListElementBaseProps,
   ActionButtonElement,
@@ -83,7 +84,7 @@ export default function PoiCarouselElement<T extends PoiListElementType>({
         {name}
       </Text>
       <Text size="tiny" alpha={0.7} margin={{ top: 2 }}>
-        {description || t(TYPE_NAMES[type])}
+        {description || getTypeNames({ type, t })}
       </Text>
       <Text size="tiny" alpha={0.7} margin={{ top: 2 }}>
         {regionName
