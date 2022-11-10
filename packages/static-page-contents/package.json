@@ -21,7 +21,7 @@
     "build:ci": "BABEL_ENV=build babel --root-mode upward src --out-dir lib --source-maps --extensions .ts,.tsx,.js --no-comments"
   },
   "dependencies": {
-    "@titicaca/color-palette": "^10.1.0"
+    "@titicaca/color-palette": "^10.2.0"
   },
   "peerDependencies": {
     "next-i18next": "*"

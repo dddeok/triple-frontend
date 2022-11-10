@@ -21,14 +21,14 @@
     "build:ci": "BABEL_ENV=build babel --root-mode upward src --out-dir lib --source-maps --extensions .ts,.tsx,.js --no-comments"
   },
   "dependencies": {
-    "@titicaca/action-sheet": "^10.1.0",
-    "@titicaca/core-elements": "^10.1.0",
-    "@titicaca/fetcher": "^10.1.0",
-    "@titicaca/modals": "^10.1.0",
-    "@titicaca/react-triple-client-interfaces": "^10.1.0",
-    "@titicaca/router": "^10.1.0",
-    "@titicaca/ui-flow": "^10.1.0",
-    "@titicaca/view-utilities": "^10.1.0"
+    "@titicaca/action-sheet": "^10.2.0",
+    "@titicaca/core-elements": "^10.2.0",
+    "@titicaca/fetcher": "^10.2.0",
+    "@titicaca/modals": "^10.2.0",
+    "@titicaca/react-triple-client-interfaces": "^10.2.0",
+    "@titicaca/router": "^10.2.0",
+    "@titicaca/ui-flow": "^10.2.0",
+    "@titicaca/view-utilities": "^10.2.0"
   },
   "peerDependencies": {
     "next-i18next": "*"
