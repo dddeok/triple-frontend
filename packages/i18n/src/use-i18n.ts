@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { useTranslation, I18nContext } from 'react-i18next'
 
-export default function useI18n(namespaces = 'common') {
+export default function useI18n(namespaces = 'common-web') {
   const { t, ready, i18n } = useTranslation(namespaces, {
     useSuspense: false,
   })

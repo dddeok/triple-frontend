@@ -16,7 +16,7 @@ export default function I18nProvider(
     <I18nextProvider
       i18n={i18nInstance}
       {...props}
-      defaultNS={props.defaultNS || 'common'}
+      defaultNS={props.defaultNS || 'common-web'}
     />
   )
 }
