@@ -7,7 +7,6 @@ import {
   MarginPadding,
   Tooltip,
 } from '@titicaca/core-elements'
-import { useI18n } from '@titicaca/i18n'
 import { useEffect, useState } from 'react'
 import { getWebStorage } from '@titicaca/web-storage'
 
@@ -51,7 +50,7 @@ export default function Actions({
   padding?: MarginPadding
   noDivider?: boolean
 }) {
-  const { t } = useI18n()
+  const { t } = useTranslation('common-web')
 
   const [isReviewTooltipExposed, setIsReviewTooltipExposed] = useState(true)
 
@@ -64,7 +63,6 @@ export default function Actions({
     )
     webStorage.setItem(REVIEW_TOOLTIP_EXPOSED, 'true')
   }, [])
-  const { t } = useTranslation('common-web')
 
   return (
     <Section {...props}>
