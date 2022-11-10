@@ -345,7 +345,6 @@ function createContext({
 }): any {
   return {
     req: {
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       headers: { 'user-agent': userAgent, cookie },
     },
     resolvedUrl,

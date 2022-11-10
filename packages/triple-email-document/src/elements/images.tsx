@@ -106,23 +106,17 @@ export default function Images({
 }) {
   const paddings = {
     default: { top: 40, bottom: 30 },
-    // eslint-disable-next-line @typescript-eslint/naming-convention
     'default-v2': { top: 20, bottom: 20 },
-    // eslint-disable-next-line @typescript-eslint/naming-convention
     'gapless-block': undefined,
   }
   const firstImagePaddings = {
     default: { left: 30, right: second !== undefined ? 15 : 30 },
-    // eslint-disable-next-line @typescript-eslint/naming-convention
     'default-v2': { left: 30, right: second !== undefined ? 5 : 30 },
-    // eslint-disable-next-line @typescript-eslint/naming-convention
     'gapless-block': undefined,
   }
   const secondImagePaddings = {
     default: { left: 15, right: 30 },
-    // eslint-disable-next-line @typescript-eslint/naming-convention
     'default-v2': { left: 5, right: 30 },
-    // eslint-disable-next-line @typescript-eslint/naming-convention
     'gapless-block': undefined,
   }
 
@@ -132,9 +126,7 @@ export default function Images({
 
   const borderRadius = {
     default: 0,
-    // eslint-disable-next-line @typescript-eslint/naming-convention
     'default-v2': 6,
-    // eslint-disable-next-line @typescript-eslint/naming-convention
     'gapless-block': 0,
   }
 

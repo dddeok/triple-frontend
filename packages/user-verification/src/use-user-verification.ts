@@ -85,11 +85,8 @@ export function useUserVerification({
 }
 
 const PREDEFINED_TARGET_PAGE_PATHS: Record<string, string> = {
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   'sms-verification': '/verifications/',
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   'personal-id-verification-with-residence': '/verifications/residence',
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   'personal-id-verification': '/verifications/personal-id-verification',
 }
 
