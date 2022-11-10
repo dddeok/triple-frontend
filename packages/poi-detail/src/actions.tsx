@@ -55,7 +55,7 @@ export default function Actions({
   const [isReviewTooltipExposed, setIsReviewTooltipExposed] = useState(true)
 
   useEffect(() => {
-    const webStorage = getWebStorage()
+    const webStorage = getWebStorage({ t })
     setIsReviewTooltipExposed(
       JSON.parse(
         webStorage.getItem(REVIEW_TOOLTIP_EXPOSED) || 'false',
