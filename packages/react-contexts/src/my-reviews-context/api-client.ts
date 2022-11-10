@@ -2,6 +2,7 @@ import { post } from '@titicaca/fetcher'
 
 export async function checkIfReviewed({ resourceId }: { resourceId: string }) {
   const response = await post<{ ids: string[] }>('/api/reviews/v2/check', {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     headers: { 'content-type': 'application/json' },
     credentials: 'same-origin',
     body: JSON.stringify({ ids: [resourceId] }),

@@ -10,6 +10,7 @@ export default async function imageDownload({
 
     const response = await fetch(`/api/images/media?ids=${imageId}`, {
       method: 'GET',
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       headers: { 'content-type': 'application/json' },
     })
 

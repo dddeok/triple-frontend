@@ -48,16 +48,20 @@ export function DocumentCarouselContainer({
 
 export const IMAGES_CONTAINER_MAP = {
   block: BlockContainer,
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   'gapless-block': Container,
   grid: GridContainer,
   default: DocumentCarouselContainer,
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   'default-v2': DocumentCarouselContainer,
 }
 
 export const ELEMENT_CONTAINER_MAP = {
   block: ImageBlockElementContainer,
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   'gapless-block': Container,
   grid: Fragment,
   default: ImageCarouselElementContainer,
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   'default-v2': ImageCarouselElementContainer,
 }

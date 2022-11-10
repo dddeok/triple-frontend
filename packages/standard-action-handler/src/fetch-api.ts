@@ -16,6 +16,7 @@ export default async function fetchApi({
 
     await fetch(apiPath as string, {
       method: (method as string) || 'GET',
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       ...(body ? { headers: { 'content-type': 'application/json' } } : {}),
       body: body as string,
     })

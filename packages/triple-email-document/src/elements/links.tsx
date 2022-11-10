@@ -73,6 +73,7 @@ type HtmlTagAttributes<T> = HTMLAttributes<T>
 declare module 'react' {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   interface AnchorHTMLAttributes<T> extends HtmlTagAttributes<T> {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     'ses:tags'?: string
   }
 }
