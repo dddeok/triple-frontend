@@ -8,9 +8,9 @@ i18n
   .use(FetchBackend)
   .init({
     fallbackLng: ['ko'],
-    ns: 'common',
+    ns: 'common-web',
     /* eslint-disable @typescript-eslint/naming-convention */
-    defaultNS: 'common',
+    defaultNS: 'common-web',
 
     interpolation: {
       escapeValue: false,
