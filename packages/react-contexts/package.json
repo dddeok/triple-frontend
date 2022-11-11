@@ -37,7 +37,7 @@
   "peerDependencies": {
     "@titicaca/triple-web-to-native-interfaces": "*",
     "firebase": "^9.11.0",
-    "next": "^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0"
+    "next": "^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0"
   },
   "author": ""
 }
